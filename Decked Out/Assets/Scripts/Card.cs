@@ -40,6 +40,8 @@ public class Card : MonoBehaviour
     public float PowerUpATKS;
     public float PowerUpAbility;
 
+    public int starCount = 1;
+
     public void Start()
     {
         actualAbility = BaseAbility;
@@ -47,11 +49,16 @@ public class Card : MonoBehaviour
         actualAttackSpeed = BaseAttackSpeed;
     }
 
-    private void upgradeCard()
+    public void UpgradeCard()
     {
         actualAttack += UpgradeATK;
         actualAttackSpeed -= UpgradeATKS;
         actualAbility += UpgradeAbility;
+    }
+
+    public void PowerUpCard()
+    {
+
     }
 
     public string CardAtk()
