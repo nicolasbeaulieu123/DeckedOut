@@ -92,6 +92,7 @@ MonoBehaviour:
   Name: Angel
   Description: Has a chance on each hit to give 1 life back. The player can go up
     to 5 lives at a time.
+  AccentsColor: {r: 1, g: 0.7812411, b: 0, a: 0}
   BaseAttack: 10
   BaseAttackSpeed: 0.8
   BaseAbility: 0.1
@@ -105,6 +106,7 @@ MonoBehaviour:
   PowerUpATK: 0
   PowerUpATKS: 0.05
   PowerUpAbility: 0.1
+  PowerUpLevel: 1
   starCount: 1
 --- !u!225 &-6213611983539623809
 CanvasGroup:

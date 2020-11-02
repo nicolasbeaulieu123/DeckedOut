@@ -33,6 +33,9 @@ public class PlaceCard : MonoBehaviour
                         created.transform.localScale = new Vector3(0.4f, 0.4f, 1);
                         created.AddComponent<DragDrop>();
                         created.GetComponent<DragDrop>().canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
+                        Card cardType = GameObject.Find("Deck").transform.Find(created.name).GetComponent<Card>();
+                        for (int i = 1; i < cardType.PowerUpLevel; i++)
+                            created.GetComponent<Card>().PowerUpCard();
                     }
                 } while (!cardPlaced);
             }

@@ -28,7 +28,7 @@ public class CardSlot : MonoBehaviour, IDropHandler
             eventData.pointerDrag.transform.SetParent(parent);
             eventData.pointerDrag.gameObject.GetComponent<RectTransform>().anchoredPosition = position;
             if (cardsMerged)
-                CardLevelsManager.Instance.CardsMerged(parent.gameObject);
+                CardMergingManager.Instance.CardsMerged(parent.gameObject);
         }
     }
 

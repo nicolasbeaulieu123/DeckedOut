@@ -25,4 +25,19 @@ public class Board : MonoBehaviour
             return int.Parse(temp);
         return -1;
     }
+
+    public GameObject[] AllCardsOnBoard()
+    {
+        GameObject[] cards = new GameObject[15];
+        int i = 0;
+        foreach (GameObject slot in slots)
+        {
+            if (slot.transform.childCount == 1)
+            {
+                cards[i] = slot.transform.GetChild(0).gameObject;
+            }
+            i++;
+        }
+        return cards;
+    }
 }

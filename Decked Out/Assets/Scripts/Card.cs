@@ -13,6 +13,8 @@ public class Card : MonoBehaviour
 
     public string Description;
 
+    public Color AccentsColor;
+
     public int BaseAttack;
     private int actualAttack;
 
@@ -39,6 +41,9 @@ public class Card : MonoBehaviour
     public int PowerUpATK;
     public float PowerUpATKS;
     public float PowerUpAbility;
+    public int PowerUpLevel = 1;
+    private static int[] PowerUpCosts = { 100, 200, 400, 700, 0 };
+    private int PowerUpCost = PowerUpCosts[0];
 
     public int starCount = 1;
 
@@ -56,9 +61,19 @@ public class Card : MonoBehaviour
         actualAbility += UpgradeAbility;
     }
 
+    public int CostPowerUp(int index)
+        => PowerUpCosts[index - 1];
+
     public void PowerUpCard()
     {
-
+        if (PowerUpLevel < 5)
+        {
+            PowerUpLevel++;
+            PowerUpCost = PowerUpCosts[PowerUpLevel - 1];
+            actualAttack += PowerUpATK;
+            actualAttackSpeed -= PowerUpATKS;
+            actualAbility += PowerUpAbility;
+        }
     }
 
     public string CardAtk()
