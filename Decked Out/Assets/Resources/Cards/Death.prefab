@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 4542977434732590479}
   - component: {fileID: 8970573740430937878}
   - component: {fileID: 57288815024186404}
+  - component: {fileID: -6420979166053864168}
+  - component: {fileID: 3766628820900139881}
   m_Layer: 5
   m_Name: Death
   m_TagString: Untagged
@@ -103,3 +105,28 @@ MonoBehaviour:
   PowerUpATK: 20
   PowerUpATKS: 0
   PowerUpAbility: 0.5
+  starCount: 1
+--- !u!225 &-6420979166053864168
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3639919167251686888}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!114 &3766628820900139881
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3639919167251686888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87910e58e02899343a4764fc955dfced, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 3932764493161316668}
   - component: {fileID: 4487293328572911081}
   - component: {fileID: 730563616429811291}
+  - component: {fileID: -1249320340363473618}
+  - component: {fileID: -8403555999754010732}
   m_Layer: 5
   m_Name: Fire
   m_TagString: Untagged
@@ -103,3 +105,28 @@ MonoBehaviour:
   PowerUpATK: 10
   PowerUpATKS: 0
   PowerUpAbility: 20
+  starCount: 1
+--- !u!225 &-1249320340363473618
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8450444320842655581}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!114 &-8403555999754010732
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8450444320842655581}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87910e58e02899343a4764fc955dfced, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

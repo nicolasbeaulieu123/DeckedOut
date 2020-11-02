@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 170467206587436352}
   - component: {fileID: 4696018168235423705}
   - component: {fileID: 4439983203020184811}
+  - component: {fileID: 3412138048581751464}
   m_Layer: 5
   m_Name: PrefabCard
   m_TagString: Untagged
@@ -92,6 +93,7 @@ MonoBehaviour:
   BaseAttack: 0
   BaseAttackSpeed: 0
   BaseAbility: 0
+  AbilityCooldown: 0
   Ability: 0
   Target: 0
   Type: 0
@@ -101,3 +103,16 @@ MonoBehaviour:
   PowerUpATK: 0
   PowerUpATKS: 0
   PowerUpAbility: 0
+  starCount: 1
+--- !u!225 &3412138048581751464
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1141079626308295975}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0

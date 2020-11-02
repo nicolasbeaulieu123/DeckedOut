@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 8343360554212418759}
   - component: {fileID: 3512691821549117022}
   - component: {fileID: 5479174371103815020}
+  - component: {fileID: -4104815239328660848}
+  - component: {fileID: -4145225403632343142}
   m_Layer: 5
   m_Name: Frost
   m_TagString: Untagged
@@ -103,3 +105,28 @@ MonoBehaviour:
   PowerUpATK: 20
   PowerUpATKS: 0
   PowerUpAbility: 0.01
+  starCount: 1
+--- !u!225 &-4104815239328660848
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9097799986319701152}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!114 &-4145225403632343142
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9097799986319701152}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87910e58e02899343a4764fc955dfced, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

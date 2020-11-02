@@ -31,15 +31,10 @@ public class PlaceCard : MonoBehaviour
                         buyCard();
                         GameObject created = Instantiate(PlayerDeck.Deck()[Random.Range(0, 5)], board.slots[index].transform, false);
                         created.transform.localScale = new Vector3(0.4f, 0.4f, 1);
+                        created.AddComponent<DragDrop>();
+                        created.GetComponent<DragDrop>().canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
                     }
                 } while (!cardPlaced);
-            }
-            for (int i = 0; i < board.slots.Length; i++)
-            {
-                if (!board.isFull[i])
-                {
-
-                }
             }
         }
     }

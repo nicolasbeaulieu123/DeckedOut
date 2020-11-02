@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 7066821435205874206}
   - component: {fileID: 80879324265779208}
   - component: {fileID: 984349432277914746}
+  - component: {fileID: -3187012554934070580}
+  - component: {fileID: -6756650831298735972}
   m_Layer: 5
   m_Name: Rainbow
   m_TagString: Untagged
@@ -103,3 +105,28 @@ MonoBehaviour:
   PowerUpATK: 10
   PowerUpATKS: 0
   PowerUpAbility: 0
+  starCount: 1
+--- !u!225 &-3187012554934070580
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3421104210975460806}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!114 &-6756650831298735972
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3421104210975460806}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87910e58e02899343a4764fc955dfced, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 3890308321996894214}
   - component: {fileID: 4406995673068158163}
   - component: {fileID: 670368991862527841}
+  - component: {fileID: -3395058137900276648}
+  - component: {fileID: -8259482087840889677}
   m_Layer: 5
   m_Name: Poison
   m_TagString: Untagged
@@ -102,3 +104,28 @@ MonoBehaviour:
   PowerUpATK: 10
   PowerUpATKS: 0
   PowerUpAbility: 25
+  starCount: 1
+--- !u!225 &-3395058137900276648
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8514293555172447847}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!114 &-8259482087840889677
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8514293555172447847}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87910e58e02899343a4764fc955dfced, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
