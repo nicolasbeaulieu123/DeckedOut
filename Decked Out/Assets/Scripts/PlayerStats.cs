@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerStats : MonoBehaviour {
 
 	public static int CP;
-	public int startCP = 10000;
+	public int startCP = 100;
 
 	public static int Lives;
 	public int startLives = 3;
@@ -14,7 +14,7 @@ public class PlayerStats : MonoBehaviour {
 
 	void Start ()
 	{
-		CP = 10000;
+		CP = startCP;
 		Lives = startLives;
 
 		WaveNumber = 1;

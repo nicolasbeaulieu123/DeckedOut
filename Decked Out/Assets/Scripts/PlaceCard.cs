@@ -36,6 +36,7 @@ public class PlaceCard : MonoBehaviour
                         Card cardType = GameObject.Find("Deck").transform.Find(created.name).GetComponent<Card>();
                         for (int i = 1; i < cardType.PowerUpLevel; i++)
                             created.GetComponent<Card>().PowerUpCard();
+                        StarCountUIManager.UpdateStarCountUI(created);
                     }
                 } while (!cardPlaced);
             }

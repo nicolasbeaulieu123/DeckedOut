@@ -1901,7 +1901,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cb326b2419b3944db35004a82aa2115, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startCP: 100
+  startCP: 100000
   startLives: 3
 --- !u!4 &807487012
 Transform:

@@ -31,6 +31,7 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
             eventData.pointerDrag.transform.SetParent(lastParent.transform);
             eventData.pointerDrag.gameObject.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 0);
         }
+        CardMergingManager.Instance.ResetCardsOpacity();
     }
     public void OnDrag(PointerEventData eventData)
     {
@@ -40,8 +41,9 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
     {
         lastParent = eventData.pointerDrag.transform.parent.gameObject;
         eventData.pointerDrag.transform.SetParent(GameObject.Find("Board").transform);
-        canvasGroup.alpha = 0.6f;
+        canvasGroup.alpha = 0.8f;
         canvasGroup.blocksRaycasts = false;
+        CardMergingManager.Instance.ShowAvailableCardsForMerging(eventData.pointerDrag.gameObject);
     }
     public void OnEndDrag(PointerEventData eventData)
     {
