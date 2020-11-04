@@ -92,7 +92,7 @@ MonoBehaviour:
   Name: Electric
   Description: When the card hits and enemy, the 2 next enemies take 70% and 30%
     damage.
-  AccentsColor: {r: 0, g: 0, b: 0, a: 0}
+  AccentsColor: {r: 1, g: 0.77647066, b: 0, a: 1}
   BaseAttack: 30
   actualAttack: 0
   BaseAttackSpeed: 0.7

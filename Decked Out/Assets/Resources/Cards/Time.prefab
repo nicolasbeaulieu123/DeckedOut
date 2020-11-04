@@ -91,7 +91,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Time
   Description: Has a chance on each hit to make all enemies move backwards.
-  AccentsColor: {r: 0, g: 0, b: 0, a: 0}
+  AccentsColor: {r: 1, g: 0.936, b: 0.82, a: 1}
   BaseAttack: 10
   actualAttack: 0
   BaseAttackSpeed: 0.8

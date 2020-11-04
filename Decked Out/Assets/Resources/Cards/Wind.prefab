@@ -67,7 +67,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 5edbddfaaa355ef4e9c002f1a9ff9a48, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6b2e3a45dc2c0f54fa6aa751255474ef, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -91,9 +91,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Wind
   Description: Has the fastest attack speed of all cards.
+  AccentsColor: {r: 0.18823531, g: 0.43137258, b: 1, a: 1}
   BaseAttack: 20
+  actualAttack: 0
   BaseAttackSpeed: 0.45
+  actualAttackSpeed: 0
   BaseAbility: 10
+  actualAbility: 0
   AbilityCooldown: 0
   Ability: 3
   Target: 1
@@ -104,6 +108,7 @@ MonoBehaviour:
   PowerUpATK: 15
   PowerUpATKS: 0
   PowerUpAbility: 10
+  PowerUpLevel: 1
   starCount: 1
 --- !u!225 &-8981068600158976917
 CanvasGroup:

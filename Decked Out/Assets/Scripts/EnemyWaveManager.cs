@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -22,7 +23,7 @@ public class EnemyWaveManager : MonoBehaviour
     public static List<Enemy> enemies = new List<Enemy>();
 
     private State state;
-    private int waveNumber = 0;
+    private static int waveNumber = 0;
     private float nextWaveSpawnTimer;
     private float nextEnemySpawnTimer;
     private int remainingEnemySpawnAmount;
@@ -48,6 +49,9 @@ public class EnemyWaveManager : MonoBehaviour
     private int fEnemyHpScale = 100;
     private int fEnemyHpScaleMod = 125;
     private const int FAST_ENEMYHP_SCALE_MOD_MOD = 50;
+
+    // For MiniBoss enemies (Triangle)
+    private int mbEnemyHp = (int)(Math.Pow(1.10101, waveNumber) * 16455.6f);
 
     // CP Gain amount for normal and fast enemies
     private static int EnemyCpGainAmount = 10;
@@ -142,7 +146,9 @@ public class EnemyWaveManager : MonoBehaviour
         }
         else if (miniBossRemaining > 0)
         {
-            enemies.Add(Enemy.Create(spawnPosition, EnemyTypes.MiniBoss + "Enemy"));
+            Enemy created = Enemy.Create(spawnPosition, EnemyTypes.MiniBoss + "Enemy");
+            enemies.Add(created);
+            created.GetComponent<Enemy>().health = waveNumber == 5 ? 5750 : mbEnemyHp;
             miniBossRemaining--;
             remainingEnemySpawnAmount--;
         }
