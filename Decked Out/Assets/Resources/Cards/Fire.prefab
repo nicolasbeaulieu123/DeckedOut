@@ -92,6 +92,7 @@ MonoBehaviour:
   Name: Fire
   Description: When the bullet hits the target, deals an explosive damage to monsters
     in range.
+  AccentsColor: {r: 1, g: 0.5953561, b: 0.25943398, a: 1}
   BaseAttack: 20
   BaseAttackSpeed: 0.8
   BaseAbility: 20
@@ -105,6 +106,7 @@ MonoBehaviour:
   PowerUpATK: 10
   PowerUpATKS: 0
   PowerUpAbility: 20
+  PowerUpLevel: 1
   starCount: 1
 --- !u!225 &-1249320340363473618
 CanvasGroup:

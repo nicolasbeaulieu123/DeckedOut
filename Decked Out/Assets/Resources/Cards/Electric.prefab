@@ -67,7 +67,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 5edbddfaaa355ef4e9c002f1a9ff9a48, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 83731a8b28e19d549953d937bfb21a2c, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -92,9 +92,13 @@ MonoBehaviour:
   Name: Electric
   Description: When the card hits and enemy, the 2 next enemies take 70% and 30%
     damage.
+  AccentsColor: {r: 0, g: 0, b: 0, a: 0}
   BaseAttack: 30
+  actualAttack: 0
   BaseAttackSpeed: 0.7
+  actualAttackSpeed: 0
   BaseAbility: 30
+  actualAbility: 0
   AbilityCooldown: 0
   Ability: 5
   Target: 1
@@ -105,6 +109,7 @@ MonoBehaviour:
   PowerUpATK: 10
   PowerUpATKS: 0
   PowerUpAbility: 20
+  PowerUpLevel: 1
   starCount: 1
 --- !u!225 &9194708834812965694
 CanvasGroup:

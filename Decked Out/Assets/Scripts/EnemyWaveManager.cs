@@ -19,7 +19,7 @@ public class EnemyWaveManager : MonoBehaviour
         Boss
     }
 
-    private static List<Enemy> enemies = new List<Enemy>();
+    public static List<Enemy> enemies = new List<Enemy>();
 
     private State state;
     private int waveNumber = 0;
@@ -50,34 +50,47 @@ public class EnemyWaveManager : MonoBehaviour
     private const int FAST_ENEMYHP_SCALE_MOD_MOD = 50;
 
     // CP Gain amount for normal and fast enemies
-    private int EnemyCpGainAmount = 10;
-    private int EnemyCpGainAmountMod = 10;
+    private static int EnemyCpGainAmount = 10;
+    private static int EnemyCpGainAmountMod = 10;
     private const int MAX_ENEMY_CP_GAIN_AMOUNT = 50;
 
     // CP Gain amount for miniboss
-    private int MiniBossCpGainAmount = 50;
-    private int MiniBossCpGainAmountMod = 50;
+    private static int MiniBossCpGainAmount = 50;
+    private static int MiniBossCpGainAmountMod = 50;
     private const int MAX_MINIBOSS_CP_GAIN_AMOUNT = 250;
 
     // CP Gain amount for boss
-    private int BossCpGainAmount = 100;
-    private int BossCpGainAmountMod = 100;
+    private static int BossCpGainAmount = 100;
+    private static int BossCpGainAmountMod = 100;
     private const int MAX_BOSS_CP_GAIN_AMOUNT = 500;
 
-    [SerializeField] private Vector3 spawnPosition = new Vector3(-229, -362);
+    [SerializeField] private Vector3 spawnPosition = new Vector3(-299.95f, -260.5f);
     private void Start()
     {
         state = State.WaitingToSpawnNextWave;
         nextWaveSpawnTimer = 3f;
     }
 
-    public static void EnemyDied(GameObject enemy)
+    public static void EnemyDied(Enemy enemy, bool killedByPlayer = false)
     {
-        for (int i = enemies.Count - 1; i >= 0; i--)
-        {
-            if (enemies[i].health <= 0)
-                enemies.RemoveAt(i);
-        }
+        if (killedByPlayer)
+            switch (enemy.name)
+            {
+                case "SquareEnemy(Clone)":
+                    PlayerStats.CP += EnemyCpGainAmount;
+                    break;
+                case "CircleEnemy(Clone)":
+                    PlayerStats.CP += EnemyCpGainAmount;
+                    break;
+                case "MiniBossEnemy(Clone)":
+                    PlayerStats.CP += MiniBossCpGainAmount;
+                    break;
+                case "BossEnemy(Clone)":
+                    PlayerStats.CP += BossCpGainAmount;
+                    break;
+            }
+        enemies.Remove(enemy);
+        Destroy(enemy.gameObject);
     }
 
     private void Update()

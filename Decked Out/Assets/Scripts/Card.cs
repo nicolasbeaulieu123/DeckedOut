@@ -16,13 +16,13 @@ public class Card : MonoBehaviour
     public Color AccentsColor;
 
     public int BaseAttack;
-    private int actualAttack;
+    public int actualAttack;
 
     public float BaseAttackSpeed; // In seconds
-    private float actualAttackSpeed; // In seconds
+    public float actualAttackSpeed; // In seconds
 
     public float BaseAbility;
-    private float actualAbility;
+    public float actualAbility;
 
     public float AbilityCooldown; // In seconds
     
@@ -47,7 +47,7 @@ public class Card : MonoBehaviour
 
     public int starCount = 1;
 
-    public void Start()
+    public void Awake()
     {
         actualAbility = BaseAbility;
         actualAttack = BaseAttack;

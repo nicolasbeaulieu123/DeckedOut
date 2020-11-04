@@ -43,8 +43,8 @@ MonoBehaviour:
     y: 826
     width: 1411
     height: 121
-  m_MinSize: {x: 102, y: 121}
-  m_MaxSize: {x: 4002, y: 4021}
+  m_MinSize: {x: 100, y: 100}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 20}
   m_Panes:
   - {fileID: 20}
@@ -150,7 +150,7 @@ MonoBehaviour:
   m_MinSize: {x: 709, y: 492}
   m_MaxSize: {x: 18004, y: 14042}
   vertical: 0
-  controlID: 98
+  controlID: 34
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -388,7 +388,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Resources
+    - Assets/JMO Assets/Cartoon FX/CFX3 Prefabs/Electric
   m_ViewMode: 0
   m_StartGridSize: 64
   m_LastFolders:
@@ -401,7 +401,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 9c3b0000
     m_LastClickedID: 15260
-    m_ExpandedIDs: 000000006c3b00006e3b0000703b0000723b0000743b0000763b0000783b00007a3b00007c3b00007e3b0000
+    m_ExpandedIDs: 00000000d83c0000da3c0000dc3c0000de3c0000e03c0000e23c0000e43c0000e63c0000e83c0000ea3c0000ec3c0000ee3c0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -426,24 +426,24 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_AssetTreeState:
-    scrollPos: {x: 0, y: 60}
+    scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: ffffffff000000006c3b00006e3b0000703b0000723b0000763b0000783b00007a3b00007c3b00007e3b0000
+    m_ExpandedIDs: ffffffff00000000d83c0000da3c0000dc3c0000de3c0000e23c0000e43c0000e83c0000ea3c0000ee3c0000543e0000643e0000683e0000a43e0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: StarCountUIManager
-      m_OriginalName: StarCountUIManager
+      m_Name: 
+      m_OriginalName: 
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 16012
+      m_UserData: 0
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 0
+      m_OriginalEventType: 11
       m_IsRenamingFilename: 1
       m_ClientGUIView: {fileID: 4}
     m_SearchString: 
@@ -554,7 +554,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: ce5bffff705fffff46d3ffff06d6ffff92d8ffff1efaffff5efaffff32fbffff763c00008c3c0000a43c0000183d0000443d0000b43d0000da3d0000e43d0000
+      m_ExpandedIDs: a26bffff70c1ffff2cd0ffff46d7ffffd6e5ffff32fbffff20700000ac700000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -614,9 +614,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 18.74357, y: -9.921459, z: -9409.125}
+    m_Target: {x: 11.080871, y: -6.4071445, z: -354.75}
     speed: 2
-    m_Value: {x: 18.74357, y: -9.921459, z: -9409.125}
+    m_Value: {x: 11.080871, y: -6.4071445, z: -354.75}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -666,9 +666,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 334.34888
+    m_Target: 284.0932
     speed: 2
-    m_Value: 334.34888
+    m_Value: 284.0932
   m_Ortho:
     m_Target: 1
     speed: 2

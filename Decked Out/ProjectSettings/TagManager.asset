@@ -11,6 +11,7 @@ TagManager:
   - Deck
   - AcquiredCard
   - Board
+  - CardOnBoard
   layers:
   - Default
   - TransparentFX
@@ -56,4 +57,7 @@ TagManager:
     locked: 0
   - name: Post Processing
     uniqueID: 3645828367
+    locked: 0
+  - name: Top
+    uniqueID: 1257165179
     locked: 0

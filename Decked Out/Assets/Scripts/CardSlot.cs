@@ -17,7 +17,7 @@ public class CardSlot : MonoBehaviour, IDropHandler
             {
                 Card self = eventData.pointerDrag.GetComponent<Card>();
                 Card target = GetTargetCard(gameObject);
-                if (self.name == target.name && self.starCount == target.starCount && self.starCount < 7)
+                if (self.name == target.name && self.starCount == target.starCount && self.starCount < 7 && self.tag == target.tag)
                 {
                     Board.Instance.isFull[Board.FindSlotIdFromName(parent.name) - 1] = false;
                     parent = gameObject.transform.parent.transform;

@@ -29,6 +29,7 @@ public class CardMergingManager : MonoBehaviour
         created.transform.localScale = new Vector3(0.4f, 0.4f, 1);
         created.AddComponent<DragDrop>();
         created.GetComponent<DragDrop>().canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
+        created.tag = "CardOnBoard";
         return created;
     }
     private void UpgradeCardStarCount(GameObject newCard, GameObject oldCard)
@@ -47,7 +48,15 @@ public class CardMergingManager : MonoBehaviour
                 Card card = cardObject.GetComponent<Card>();
                 Card selectedCard = selectedCardObject.GetComponent<Card>();
                 if (!(card.name == selectedCard.name && card.starCount == selectedCard.starCount))
+                {
+                    for (int i = 0; i < cardObject.transform.childCount; i++)
+                    {
+                        Color tempColor = cardObject.transform.GetChild(i).GetComponent<SpriteRenderer>().color;
+                        tempColor.a = 0.1f;
+                        cardObject.transform.GetChild(i).GetComponent<SpriteRenderer>().color = tempColor;
+                    }
                     card.GetComponent<CanvasGroup>().alpha = 0.3f;
+                }
             }
         }
     }
@@ -56,6 +65,14 @@ public class CardMergingManager : MonoBehaviour
         GameObject[] cardsOnBoard = Board.Instance.AllCardsOnBoard();
         foreach (GameObject card in cardsOnBoard)
             if (card != null)
+            {
+                for (int i = 0; i < card.transform.childCount; i++)
+                {
+                    Color tempColor = card.transform.GetChild(i).GetComponent<SpriteRenderer>().color;
+                    tempColor.a = 100;
+                    card.transform.GetChild(i).GetComponent<SpriteRenderer>().color = tempColor;
+                }
                 card.GetComponent<CanvasGroup>().alpha = 1;
+            }
     }
 }

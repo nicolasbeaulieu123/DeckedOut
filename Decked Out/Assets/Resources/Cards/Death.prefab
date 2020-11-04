@@ -92,6 +92,7 @@ MonoBehaviour:
   Name: Death
   Description: Has a chance on each hit to instantly kill the target. The ability
     does not apply to bosses.
+  AccentsColor: {r: 0.21698111, g: 0.21698111, b: 0.21698111, a: 1}
   BaseAttack: 20
   BaseAttackSpeed: 1.2
   BaseAbility: 2
@@ -105,6 +106,7 @@ MonoBehaviour:
   PowerUpATK: 20
   PowerUpATKS: 0
   PowerUpAbility: 0.5
+  PowerUpLevel: 1
   starCount: 1
 --- !u!225 &-6420979166053864168
 CanvasGroup:

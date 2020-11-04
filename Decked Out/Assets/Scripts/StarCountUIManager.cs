@@ -14,11 +14,11 @@ public static class StarCountUIManager
         new float[,] { { -19, 33.5f }, { 19, 33.5f }, { -19, -33.5f }, { 19, -33.5f }, { -19, 0 }, { 19, 0 } },
         new float[,] { { 0, 0 } },
     };
-    private static readonly float[] scale = { 3, 3 };
+    private static readonly float[] scale = { 5, 5 };
     public static void UpdateStarCountUI(GameObject go)
     {
         Card card = go.GetComponent<Card>();
-        GameObject starPrefab = Resources.Load<GameObject>("star");
+        GameObject starPrefab = Resources.Load<GameObject>("Star");
 
         if (card.starCount != 7)
         {
@@ -29,6 +29,9 @@ public static class StarCountUIManager
                 GameObject created = GameObject.Instantiate(starPrefab, go.transform, false);
                 created.transform.localPosition = new Vector3(x, y, 0);
                 created.transform.localScale = new Vector3(scale[0], scale[1], 0);
+                created.GetComponent<SpriteRenderer>().color = card.AccentsColor;
+                GameObject.Instantiate(new GameObject("ProjectileShootFromPosition"), created.transform, false);
+                created.AddComponent<CardShoot>();
             }
         }
         else
@@ -36,6 +39,9 @@ public static class StarCountUIManager
             GameObject created = GameObject.Instantiate(starPrefab, go.transform, false);
             created.transform.localPosition = new Vector3(0, 0, 0);
             created.transform.localScale = new Vector3(scale[0] * 2, scale[1] * 2, 0);
+            created.GetComponent<SpriteRenderer>().color = card.AccentsColor;
+            GameObject.Instantiate(new GameObject("ProjectileShootFromPosition"), created.transform, false);
+            created.AddComponent<CardShoot>();
         }
     }
 }

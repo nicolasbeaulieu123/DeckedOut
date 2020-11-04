@@ -37,6 +37,7 @@ public class PlaceCard : MonoBehaviour
                         for (int i = 1; i < cardType.PowerUpLevel; i++)
                             created.GetComponent<Card>().PowerUpCard();
                         StarCountUIManager.UpdateStarCountUI(created);
+                        created.tag = "CardOnBoard";
                     }
                 } while (!cardPlaced);
             }

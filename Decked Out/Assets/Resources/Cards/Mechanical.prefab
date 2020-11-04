@@ -91,6 +91,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Mechanical
   Description: Deals double damage to bosses.
+  AccentsColor: {r: 0.40000004, g: 0.40000004, b: 0.40000004, a: 1}
   BaseAttack: 100
   BaseAttackSpeed: 1
   BaseAbility: 0
@@ -104,6 +105,7 @@ MonoBehaviour:
   PowerUpATK: 100
   PowerUpATKS: 0
   PowerUpAbility: 0
+  PowerUpLevel: 1
   starCount: 1
 --- !u!225 &-3824543746896453240
 CanvasGroup:
