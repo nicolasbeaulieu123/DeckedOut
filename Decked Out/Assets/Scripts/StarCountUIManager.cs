@@ -30,8 +30,8 @@ public static class StarCountUIManager
                 created.transform.localPosition = new Vector3(x, y, 0);
                 created.transform.localScale = new Vector3(scale[0], scale[1], 0);
                 created.GetComponent<SpriteRenderer>().color = card.AccentsColor;
-                GameObject.Instantiate(new GameObject("ProjectileShootFromPosition"), created.transform, false);
                 created.AddComponent<CardShoot>();
+                created.GetComponent<SpriteRenderer>().sortingLayerName = "Top";
             }
         }
         else
@@ -40,8 +40,8 @@ public static class StarCountUIManager
             created.transform.localPosition = new Vector3(0, 0, 0);
             created.transform.localScale = new Vector3(scale[0] * 2, scale[1] * 2, 0);
             created.GetComponent<SpriteRenderer>().color = card.AccentsColor;
-            GameObject.Instantiate(new GameObject("ProjectileShootFromPosition"), created.transform, false);
             created.AddComponent<CardShoot>();
+            created.GetComponent<SpriteRenderer>().sortingLayerName = "Top";
         }
     }
 }

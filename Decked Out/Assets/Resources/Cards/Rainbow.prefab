@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 984349432277914746}
   - component: {fileID: -3187012554934070580}
   - component: {fileID: -6756650831298735972}
+  - component: {fileID: -3169065116719848479}
+  - component: {fileID: 6178238106515843982}
   m_Layer: 5
   m_Name: Rainbow
   m_TagString: Untagged
@@ -67,7 +69,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 5edbddfaaa355ef4e9c002f1a9ff9a48, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2421ce6d177359641b439ab8b970624a, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -94,10 +96,14 @@ MonoBehaviour:
     card as the target card.
   AccentsColor: {r: 0, g: 0, b: 0, a: 1}
   BaseAttack: 20
+  actualAttack: 0
   BaseAttackSpeed: 1
+  actualAttackSpeed: 0
   BaseAbility: 0
-  AbilityCooldown: 0
+  actualAbility: 0
   Ability: 10
+  AbilityCooldown: 0
+  AbilityDescription: 
   Target: 1
   Type: 1
   UpgradeATK: 5
@@ -108,6 +114,7 @@ MonoBehaviour:
   PowerUpAbility: 0
   PowerUpLevel: 1
   starCount: 1
+  CardObject: {fileID: 0}
 --- !u!225 &-3187012554934070580
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -132,3 +139,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87910e58e02899343a4764fc955dfced, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!223 &-3169065116719848479
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3421104210975460806}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 2
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 0
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_AdditionalShaderChannelsFlag: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_TargetDisplay: 0
+--- !u!114 &6178238106515843982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3421104210975460806}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295

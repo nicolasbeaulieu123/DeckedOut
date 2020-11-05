@@ -45,3 +45,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pfDamagePopup: {fileID: 7960092409217759549, guid: 4997d260f7aa2074da870217c93f7fd4,
     type: 3}
+  pfFrostAbility: {fileID: 2963428409142131910, guid: 259c6d832fae03f4e99789a7316f0b0e,
+    type: 3}

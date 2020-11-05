@@ -132,7 +132,7 @@ public class CardsHandler : MonoBehaviour, IPointerDownHandler
         GameObject.Find("TYPE").GetComponent<TextMeshProUGUI>().text = card.CardType();
         GameObject.Find("ATKSPEED").GetComponent<TextMeshProUGUI>().text = card.CardAtkSpeed();
         GameObject.Find("TARGET").GetComponent<TextMeshProUGUI>().text = card.CardTarget();
-        GameObject.Find("ABILITY").GetComponent<TextMeshProUGUI>().text = card.CardAbility();
+        GameObject.Find("ABILITY").GetComponent<TextMeshProUGUI>().text = card.AbilityDescription;
         GameObject.Find("ABILITYDMG").GetComponent<TextMeshProUGUI>().text = card.CardAbilityDmg();
         if (card.GetComponent<Image>().sprite.name == "blank")
         {

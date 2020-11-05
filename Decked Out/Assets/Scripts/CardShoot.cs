@@ -10,7 +10,7 @@ public class CardShoot : MonoBehaviour
 
     private void Awake()
     {
-        projectileShootFromPosition = transform.Find("ProjectileShootFromPosition(Clone)").position;
+        projectileShootFromPosition = transform.Find("ProjectileShootFromPosition").position;
         shootTimerMax = transform.parent.GetComponent<Card>().actualAttackSpeed;
     }
     private void Update()
@@ -25,7 +25,7 @@ public class CardShoot : MonoBehaviour
             shootTimer = shootTimerMax;
             if (enemy != null)
             {
-                Projectile.Create(projectileShootFromPosition, enemy, card.AccentsColor, card.actualAttack);
+                Projectile.Create(projectileShootFromPosition, enemy, card);
             }
         }
     }
@@ -38,16 +38,19 @@ public class CardShoot : MonoBehaviour
             default:
                 break;
             case Target.First:
-                enemy = Enemy.GetFirstEnemy();
+                enemy = Enemy.GetFirstOrLastEnemy(true);
                 break;
             case Target.Last:
-                enemy = Enemy.GetLastEnemy();
+                enemy = Enemy.GetFirstOrLastEnemy(false);
                 break;
             case Target.Random:
                 enemy = Enemy.GetRandomEnemy();
                 break;
             case Target.Strongest:
                 enemy = Enemy.GetStrongestEnemy();
+                break;
+            case Target.NotInfected:
+                enemy = Enemy.GetNotInfectedEnemy();
                 break;
         }
         return enemy;

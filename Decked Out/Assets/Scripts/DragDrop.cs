@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class DragDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndDragHandler, IDragHandler, IPointerUpHandler
+public class DragDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndDragHandler, IDragHandler
 {
     public static DragDrop Instance { get; private set; }
 
@@ -24,23 +24,14 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
     {
         lastParent = eventData.pointerEnter.transform.parent.gameObject;
     }
-    public void OnPointerUp(PointerEventData eventData)
-    {
-        if (!eventData.pointerEnter.name.Contains("Slot") && !eventData.pointerEnter.name.Contains("(Clone)"))
-        {
-            eventData.pointerDrag.transform.SetParent(lastParent.transform);
-            eventData.pointerDrag.gameObject.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 0);
-        }
-        CardMergingManager.Instance.ResetCardsOpacity();
-    }
     public void OnDrag(PointerEventData eventData)
     {
         rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
     }
     public void OnBeginDrag(PointerEventData eventData)
     {
-        lastParent = eventData.pointerDrag.transform.parent.gameObject;
-        eventData.pointerDrag.transform.SetParent(GameObject.Find("Board").transform);
+        eventData.pointerDrag.GetComponent<Canvas>().overrideSorting = true;
+        eventData.pointerDrag.GetComponent<Canvas>().sortingLayerName = "Top";
         canvasGroup.alpha = 0.8f;
         canvasGroup.blocksRaycasts = false;
         CardMergingManager.Instance.ShowAvailableCardsForMerging(eventData.pointerDrag.gameObject);
@@ -49,6 +40,12 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
     {
         canvasGroup.alpha = 1;
         canvasGroup.blocksRaycasts = true;
+        eventData.pointerDrag.GetComponent<Canvas>().overrideSorting = false;
+        if (!eventData.pointerEnter.name.Contains("Slot") && !eventData.pointerEnter.name.Contains("(Clone)"))
+        {
+            eventData.pointerDrag.gameObject.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
+        }
+        CardMergingManager.Instance.ResetCardsOpacity();
     }
 
     public void SetCard(Card card)

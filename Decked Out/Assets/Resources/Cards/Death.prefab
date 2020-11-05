@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 57288815024186404}
   - component: {fileID: -6420979166053864168}
   - component: {fileID: 3766628820900139881}
+  - component: {fileID: 4430912357414505893}
+  - component: {fileID: 8740227061803055662}
   m_Layer: 5
   m_Name: Death
   m_TagString: Untagged
@@ -94,10 +96,14 @@ MonoBehaviour:
     does not apply to bosses.
   AccentsColor: {r: 0.21698111, g: 0.21698111, b: 0.21698111, a: 1}
   BaseAttack: 20
+  actualAttack: 0
   BaseAttackSpeed: 1.2
+  actualAttackSpeed: 0
   BaseAbility: 2
-  AbilityCooldown: 0
+  actualAbility: 0
   Ability: 9
+  AbilityCooldown: 0
+  AbilityDescription: Instant Death
   Target: 1
   Type: 1
   UpgradeATK: 4
@@ -108,6 +114,7 @@ MonoBehaviour:
   PowerUpAbility: 0.5
   PowerUpLevel: 1
   starCount: 1
+  CardObject: {fileID: 0}
 --- !u!225 &-6420979166053864168
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -132,3 +139,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87910e58e02899343a4764fc955dfced, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!223 &4430912357414505893
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3639919167251686888}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 2
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 0
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_AdditionalShaderChannelsFlag: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_TargetDisplay: 0
+--- !u!114 &8740227061803055662
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3639919167251686888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295

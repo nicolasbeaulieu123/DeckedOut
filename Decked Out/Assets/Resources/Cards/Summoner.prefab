@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 9158818234560230603}
   - component: {fileID: 776598380098455372}
   - component: {fileID: 2557485142601284185}
+  - component: {fileID: 5076216203996399289}
+  - component: {fileID: 5196335476891422243}
   m_Layer: 5
   m_Name: Summoner
   m_TagString: Untagged
@@ -99,8 +101,9 @@ MonoBehaviour:
   actualAttackSpeed: 0
   BaseAbility: 0
   actualAbility: 0
-  AbilityCooldown: 0
   Ability: 12
+  AbilityCooldown: 0
+  AbilityDescription: 
   Target: 1
   Type: 2
   UpgradeATK: 10
@@ -111,6 +114,7 @@ MonoBehaviour:
   PowerUpAbility: 0
   PowerUpLevel: 1
   starCount: 1
+  CardObject: {fileID: 0}
 --- !u!225 &776598380098455372
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -135,3 +139,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87910e58e02899343a4764fc955dfced, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!223 &5076216203996399289
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5571718297841808647}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 2
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 0
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_AdditionalShaderChannelsFlag: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_TargetDisplay: 0
+--- !u!114 &5196335476891422243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5571718297841808647}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295

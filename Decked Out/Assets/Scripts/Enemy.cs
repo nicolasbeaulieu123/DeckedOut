@@ -6,28 +6,39 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    
+
     public float speed;
+    public float baseSpeed;
     public float health;
     public float armor;
     public float CPGainAmount;
+
+    public bool Infected = false;
+    public float infectedDamageCooldown;
+
     public TextMesh healthText;
     private Waypoints Wpoints;
 
     private int waypointIndex;
 
-    void Start(){
+    void Start()
+    {
         Wpoints = GameObject.FindGameObjectWithTag("Waypoints").GetComponent<Waypoints>();
     }
 
-    void Update(){
+    void Update()
+    {
         DisplayHealth();
         transform.position = Vector2.MoveTowards(transform.position, Wpoints.waypoints[waypointIndex].position, speed * Time.deltaTime);
 
-        if(Vector2.Distance(transform.position, Wpoints.waypoints[waypointIndex].position) < 0.1f){
-            if(waypointIndex < Wpoints.waypoints.Length - 1){
+        if (Vector2.Distance(transform.position, Wpoints.waypoints[waypointIndex].position) < 0.1f)
+        {
+            if (waypointIndex < Wpoints.waypoints.Length - 1)
+            {
                 waypointIndex++;
-            } else{
+            }
+            else
+            {
                 PlayerStats.Lives--;
                 gameObject.GetComponent<Enemy>().health = 0;
                 EnemyWaveManager.EnemyDied(gameObject.GetComponent<Enemy>());
@@ -36,11 +47,12 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    public void DisplayHealth(){
+    public void DisplayHealth()
+    {
         healthText.text = health.ToString();
     }
 
-    public void Damage(int damageAmount)
+    public void Damage(float damageAmount)
     {
         health -= damageAmount;
         if (IsDead())
@@ -51,35 +63,28 @@ public class Enemy : MonoBehaviour
         => health <= 0;
 
 
-    public static Enemy Create(Vector3 position,string enemyName) {
+    public static Enemy Create(Vector3 position, string enemyName)
+    {
         Transform pfEnemy = Resources.Load<Transform>(enemyName);
         Transform enemyTransform = Instantiate(pfEnemy, position, Quaternion.identity);
+        enemyTransform.SetParent(GameObject.Find("Enemies").transform);
         Enemy enemy = enemyTransform.GetComponent<Enemy>();
         return enemy;
     }
     public Vector3 GetPosition()
         => transform.position;
-    public static Enemy GetFirstEnemy()
+    public static Enemy GetFirstOrLastEnemy(bool first)
     {
-        Enemy firstEnemy = null;
+        SortEnemyListByDistanceFromEnd();
+        Enemy enemy = null;
         if (EnemyWaveManager.enemies.Count > 0)
         {
-            float smallestDistance = float.MaxValue;
-            foreach (Enemy enemy in EnemyWaveManager.enemies)
-            {
-                float totalDistanceLeft = 0;
-                for (int i = enemy.waypointIndex; i < Waypoints.Instance.waypoints.Length; i++)
-                {
-                    totalDistanceLeft += Math.Abs(Vector3.Distance(enemy.GetPosition(), Waypoints.Instance.waypoints[i].position));
-                }
-                if (totalDistanceLeft < smallestDistance)
-                {
-                    smallestDistance = totalDistanceLeft;
-                    firstEnemy = enemy;
-                }
-            }
+            if (first)
+                enemy = EnemyWaveManager.enemies[0];
+            else
+                enemy =  EnemyWaveManager.enemies[EnemyWaveManager.enemies.Count - 1];
         }
-        return firstEnemy;
+        return enemy;
     }
     public static Enemy GetStrongestEnemy()
     {
@@ -93,16 +98,62 @@ public class Enemy : MonoBehaviour
         }
         return strongestEnemy;
     }
-    public static Enemy GetLastEnemy()
-    {
-        if (EnemyWaveManager.enemies.Count > 0)
-            return EnemyWaveManager.enemies[EnemyWaveManager.enemies.Count - 1];
-        return null;
-    }
     public static Enemy GetRandomEnemy()
     {
         if (EnemyWaveManager.enemies.Count > 0)
             return EnemyWaveManager.enemies[UnityEngine.Random.Range(0, EnemyWaveManager.enemies.Count)];
         return null;
+    }
+    public static Enemy GetNotInfectedEnemy()
+    {
+        SortEnemyListByDistanceFromEnd();
+        Enemy targetEnemy = null;
+        if (EnemyWaveManager.enemies.Count > 0)
+        {
+            foreach (Enemy enemy in EnemyWaveManager.enemies)
+            {
+                if (!enemy.Infected)
+                {
+                    targetEnemy = enemy;
+                    break;
+                }
+            }
+            if (targetEnemy == null)
+                targetEnemy = EnemyWaveManager.enemies[0];
+        }
+        return targetEnemy;
+    }
+
+    public float GetEnemyDistanceFromEnd()
+    {
+        float totalDistanceLeft = 0;
+        bool nextWaypointIsEnemyNextWaypoint = true;
+        for (int i = this.waypointIndex; i < Waypoints.Instance.waypoints.Length; i++)
+        {
+            if (nextWaypointIsEnemyNextWaypoint)
+            {
+                totalDistanceLeft += Math.Abs(Vector3.Distance(this.GetPosition(), Waypoints.Instance.waypoints[i].position));
+                nextWaypointIsEnemyNextWaypoint = false;
+            }
+            else
+                totalDistanceLeft += Math.Abs(Vector3.Distance(Waypoints.Instance.waypoints[i - 1].position, Waypoints.Instance.waypoints[i].position));
+        }
+        return totalDistanceLeft;
+    }
+
+    public static void SortEnemyListByDistanceFromEnd()
+    {
+        for (int i = 0; i < EnemyWaveManager.enemies.Count - 1; i++)
+        {
+            for (int j = 0; j < EnemyWaveManager.enemies.Count - 1; j++)
+            {
+                if (EnemyWaveManager.enemies[j].GetEnemyDistanceFromEnd() > EnemyWaveManager.enemies[j + 1].GetEnemyDistanceFromEnd())
+                {
+                    Enemy t = EnemyWaveManager.enemies[j + 1];
+                    EnemyWaveManager.enemies[j + 1] = EnemyWaveManager.enemies[j];
+                    EnemyWaveManager.enemies[j] = t;
+                }
+            }
+        }
     }
 }

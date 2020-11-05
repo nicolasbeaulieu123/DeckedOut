@@ -7,20 +7,26 @@ using UnityEngine.EventSystems;
 
 public class PlayerDeck : MonoBehaviour, IPointerDownHandler
 {
+    private static bool loaded = false;
+    public void Start()
+    {
+        if (!loaded)
+            LoadPlayerDeckImages();
+    }
     public void OnPointerDown(PointerEventData eventData)
     {
-        Card cardType = eventData.pointerEnter.GetComponent<Card>();
-        if (cardType.PowerUpLevel < 5)
+        Card cardType = eventData.pointerCurrentRaycast.gameObject.GetComponent<Card>();
+        if (cardType.PowerUpLevel < 5 && PlayerStats.CP >= cardType.CostPowerUp(cardType.PowerUpLevel))
         {
             PlayerStats.CP -= cardType.CostPowerUp(cardType.PowerUpLevel);
             ChangeCardLevelText(eventData.pointerEnter);
             ChangeCardPowerUpCostText(eventData.pointerEnter);
-        }
-        cardType.PowerUpCard();
-        foreach (GameObject card in Board.Instance.AllCardsOnBoard())
-        {
-            if (card != null && card.name == eventData.pointerEnter.name)
-                card.GetComponent<Card>().PowerUpCard();
+            cardType.PowerUpCard();
+            foreach (GameObject card in Board.Instance.AllCardsOnBoard())
+            {
+                if (card != null && card.name == eventData.pointerEnter.name)
+                    card.GetComponent<Card>().PowerUpCard();
+            }
         }
     }
     private void ChangeCardLevelText(GameObject cardType)
@@ -55,6 +61,7 @@ public class PlayerDeck : MonoBehaviour, IPointerDownHandler
             created.transform.SetParent(GameObject.Find("Deck").transform);
             created.AddComponent<PlayerDeck>();
         }
+        loaded = true;
     }
     public static GameObject[] Deck()
     {

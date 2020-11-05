@@ -7,11 +7,12 @@ using UnityEngine;
 public class DamagePopup : MonoBehaviour
 {
     [SerializeField] private GameObject pfDamagePopup;
-    public static DamagePopup Create(Vector3 position, int damageAmount, bool isCriticalHit)
+    public static DamagePopup Create(Vector3 position, float damageAmount, bool isCriticalHit, string AbilityDamageColor)
     {
         Transform damagePopupTransform = Instantiate(GameAssets.Instance.pfDamagePopup.transform, position, Quaternion.identity);
+        damagePopupTransform.SetParent(GameObject.Find("DamagePopups").transform);
         DamagePopup damagePopup = damagePopupTransform.GetComponent<DamagePopup>();
-        damagePopup.Setup(damageAmount, isCriticalHit);
+        damagePopup.Setup(damageAmount, isCriticalHit, AbilityDamageColor);
 
         return damagePopup;
     }
@@ -27,7 +28,7 @@ public class DamagePopup : MonoBehaviour
     {
         textMesh = transform.GetComponent<TextMeshPro>();
     }
-    public void Setup(int damageAmount, bool isCriticalHit)
+    public void Setup(float damageAmount, bool isCriticalHit, string abilityDamageColor)
     {
         textMesh.SetText(damageAmount.ToString());
         if (!isCriticalHit)
@@ -40,6 +41,8 @@ public class DamagePopup : MonoBehaviour
             textMesh.fontSize = 140;
             textColor = UtilsClass.GetColorFromString("FF2B00");
         }
+        if (abilityDamageColor != "000000")
+            textColor = UtilsClass.GetColorFromString(abilityDamageColor);
         textMesh.color = textColor;
         disappearTimer = DISAPPEAR_TIMER_MAX;
 

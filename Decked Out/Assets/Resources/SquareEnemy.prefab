@@ -139,8 +139,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 40
+  baseSpeed: 40
   health: 200
   armor: 0
+  CPGainAmount: 0
   healthText: {fileID: 8008405456576256997}
 --- !u!1 &7780205727865969491
 GameObject:

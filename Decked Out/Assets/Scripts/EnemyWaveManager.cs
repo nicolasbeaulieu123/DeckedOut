@@ -23,7 +23,7 @@ public class EnemyWaveManager : MonoBehaviour
     public static List<Enemy> enemies = new List<Enemy>();
 
     private State state;
-    private static int waveNumber = 0;
+    private int waveNumber = 0;
     private float nextWaveSpawnTimer;
     private float nextEnemySpawnTimer;
     private int remainingEnemySpawnAmount;
@@ -46,12 +46,13 @@ public class EnemyWaveManager : MonoBehaviour
 
     // For fast enemies (Circle)
     private int fEnemyHp;
+    private int tempFEnemyHp;
     private int fEnemyHpScale = 100;
     private int fEnemyHpScaleMod = 125;
     private const int FAST_ENEMYHP_SCALE_MOD_MOD = 50;
 
     // For MiniBoss enemies (Triangle)
-    private int mbEnemyHp = (int)(Math.Pow(1.10101, waveNumber) * 16455.6f);
+    private int mbEnemyHp;
 
     // CP Gain amount for normal and fast enemies
     private static int EnemyCpGainAmount = 10;
@@ -141,6 +142,7 @@ public class EnemyWaveManager : MonoBehaviour
         {
             Enemy created = Enemy.Create(spawnPosition, EnemyTypes.Boss + "Enemy");
             enemies.Add(created);
+            created.GetComponent<Enemy>().health = (int)(64.176 * Math.Pow(waveNumber, 2.8152) + (0.2755 * Math.Pow(waveNumber, 4) - 13.32 * Math.Pow(waveNumber, 3) - 10.387 * Math.Pow(waveNumber, 2) + 1921.6 * waveNumber - 2528.7));
             bossRemaining--;
             remainingEnemySpawnAmount--;
         }
@@ -148,7 +150,7 @@ public class EnemyWaveManager : MonoBehaviour
         {
             Enemy created = Enemy.Create(spawnPosition, EnemyTypes.MiniBoss + "Enemy");
             enemies.Add(created);
-            created.GetComponent<Enemy>().health = waveNumber == 5 ? 5750 : mbEnemyHp;
+            created.GetComponent<Enemy>().health = (int)(28 * Math.Pow(waveNumber, 2.9096) + (-0.0001 * Math.Pow(waveNumber, 5) + 0.2588 * Math.Pow(waveNumber, 4) - 10.514 * Math.Pow(waveNumber, 3) + 50.258 * Math.Pow(waveNumber, 2) + 541.13 * waveNumber - 85.326));
             miniBossRemaining--;
             remainingEnemySpawnAmount--;
         }
@@ -163,7 +165,13 @@ public class EnemyWaveManager : MonoBehaviour
         }
         else if (fastEnemiesRemaining > 0)
         {
-            enemies.Add(Enemy.Create(spawnPosition, EnemyTypes.Circle + "Enemy"));
+            Enemy created = Enemy.Create(spawnPosition, EnemyTypes.Circle + "Enemy");
+            if (nextFastEnemiesAmount == fastEnemiesRemaining)
+                fEnemyHp = (int)(0.6949 * Math.Pow(waveNumber, 3) + 15.645 * Math.Pow(waveNumber, 2) - 12.023 * waveNumber + 441.27);
+            else
+                fEnemyHp += fEnemyHpScale;
+            created.GetComponent<Enemy>().health = fEnemyHp;
+            enemies.Add(created);
             fastEnemiesRemaining--;
             remainingEnemySpawnAmount--;
         }
@@ -197,6 +205,11 @@ public class EnemyWaveManager : MonoBehaviour
         {
             nEnemyHpScaleMod += nEnemyHpScaleModPer10Rounds;
             EnemyCpGainAmount = EnemyCpGainAmount < MAX_ENEMY_CP_GAIN_AMOUNT ? EnemyCpGainAmount + EnemyCpGainAmountMod : EnemyCpGainAmount;
+        }
+        if (waveNumber % 5 == 1 && waveNumber % 10 != 0 && waveNumber > 5)
+        {
+            fEnemyHpScale += fEnemyHpScaleMod;
+            fEnemyHpScaleMod += FAST_ENEMYHP_SCALE_MOD_MOD;
         }
         nEnemyHpScale = waveNumber > 1 ? nEnemyHpScale + nEnemyHpScaleMod : nEnemyHpScale;
         //OnWaveNumberChanged?.Invoke(this, EventArgs.Empty);

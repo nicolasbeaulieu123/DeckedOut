@@ -11,7 +11,6 @@ public class PlaceCard : MonoBehaviour
     public void Start()
     {
         board = GameObject.FindGameObjectWithTag("Board").GetComponent<Board>();
-        PlayerDeck.LoadPlayerDeckImages();
     }
 
     public void OnTriggerButton()
@@ -33,7 +32,7 @@ public class PlaceCard : MonoBehaviour
                         created.transform.localScale = new Vector3(0.4f, 0.4f, 1);
                         created.AddComponent<DragDrop>();
                         created.GetComponent<DragDrop>().canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
-                        Card cardType = GameObject.Find("Deck").transform.Find(created.name).GetComponent<Card>();
+                        Card cardType = created.GetComponent<Card>();
                         for (int i = 1; i < cardType.PowerUpLevel; i++)
                             created.GetComponent<Card>().PowerUpCard();
                         StarCountUIManager.UpdateStarCountUI(created);

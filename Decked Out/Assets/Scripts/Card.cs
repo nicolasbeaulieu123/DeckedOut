@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 public enum Type { Buff, Magic, Physical, Transform, Debuff, Install }
-public enum Target { Strongest, First, Last, Random, None };
+public enum Target { None, First, Strongest, Random, Last, NotInfected };
 public enum Abilities { None, Fire, Mechanical, Wind, Poison, Electric, Water, Angel, Time, Death, Rainbow, Sacrifice, Summoner, Boost, Frost }
 
 public class Card : MonoBehaviour
@@ -24,11 +24,10 @@ public class Card : MonoBehaviour
     public float BaseAbility;
     public float actualAbility;
 
-    public float AbilityCooldown; // In seconds
-    
     public Abilities Ability;
-    private Ability ability;
-
+    public float AbilityCooldown; // In seconds
+    public string AbilityDescription;
+    
     public Target Target;
     public Type Type;
 
@@ -47,11 +46,19 @@ public class Card : MonoBehaviour
 
     public int starCount = 1;
 
+    public static int CritDamageBoost = 500;
+
     public void Awake()
     {
         actualAbility = BaseAbility;
         actualAttack = BaseAttack;
         actualAttackSpeed = BaseAttackSpeed;
+        activateAbilityTimer = AbilityCooldown;
+    }
+
+    public void Update()
+    {
+        activateAbilityTimer -= Time.deltaTime;
     }
 
     public void UpgradeCard()
@@ -76,6 +83,33 @@ public class Card : MonoBehaviour
         }
     }
 
+    private float activateAbilityTimer;
+
+    public void TryActivateAbility(Enemy enemy)
+    {
+        if (activateAbilityTimer < 0)
+        {
+            activateAbilityTimer = AbilityCooldown;
+            ActivateAbility(enemy);
+        }
+    }
+
+    private void ActivateAbility(Enemy enemy)
+    {
+        if (gameObject != null)
+        {
+            switch (Ability)
+            {
+                case Abilities.Frost:
+                    gameObject.GetComponent<FrostAbility>().ApplySlowEffect(enemy, this.actualAbility);
+                    break;
+                case Abilities.Poison:
+                    gameObject.GetComponent<PoisonAbility>().ApplyPoisonEffect(enemy, this.actualAbility);
+                    break;
+            }
+        }
+    }
+
     public string CardAtk()
         => actualAttack.ToString();
     public string CardType()
@@ -84,8 +118,6 @@ public class Card : MonoBehaviour
         => actualAttackSpeed.ToString();
     public string CardTarget()
         => Target.ToString();
-    public string CardAbility()
-        => Ability.ToString();
     public string CardAbilityDmg()
         => actualAbility.ToString();
     public string CardDescription()
