@@ -19,31 +19,32 @@ public class PlayerDeck : MonoBehaviour, IPointerDownHandler
         if (cardType.PowerUpLevel < 5 && PlayerStats.CP >= cardType.CostPowerUp(cardType.PowerUpLevel))
         {
             PlayerStats.CP -= cardType.CostPowerUp(cardType.PowerUpLevel);
-            ChangeCardLevelText(eventData.pointerEnter);
-            ChangeCardPowerUpCostText(eventData.pointerEnter);
+            ChangeCardLevelText();
+            ChangeCardPowerUpCostText();
             cardType.PowerUpCard();
             foreach (GameObject card in Board.Instance.AllCardsOnBoard())
             {
-                if (card != null && card.name == eventData.pointerEnter.name)
-                    card.GetComponent<Card>().PowerUpCard();
+                if (card != null)
+                    if (card.name == eventData.pointerPressRaycast.gameObject.name)
+                        card.GetComponent<Card>().PowerUpCard();
             }
         }
     }
-    private void ChangeCardLevelText(GameObject cardType)
+    private void ChangeCardLevelText()
     {
-        int index = cardType.transform.GetSiblingIndex() + 1;
+        int index = gameObject.transform.GetSiblingIndex() + 1;
         GameObject textObject = GameObject.Find("DeckCardLevels").transform.Find("CardLvl (" + index + ")").gameObject;
-        int nextLevel = cardType.GetComponent<Card>().PowerUpLevel + 1;
+        int nextLevel = gameObject.GetComponent<Card>().PowerUpLevel + 1;
         string newLevel = nextLevel == 5 ? "MAX" : nextLevel.ToString();
         string text = textObject.GetComponent<TextMeshProUGUI>().text;
         textObject.GetComponent<TextMeshProUGUI>().text = text.Remove(text.Length - 1, 1) + newLevel;
     }
 
-    private void ChangeCardPowerUpCostText(GameObject cardType)
+    private void ChangeCardPowerUpCostText()
     {
-        int index = cardType.transform.GetSiblingIndex() + 1;
+        int index = gameObject.transform.GetSiblingIndex() + 1;
         GameObject textObject = GameObject.Find("DeckCardPowerUpCosts").transform.Find("CardLvlPrice (" + index + ")").gameObject;
-        Card card = cardType.GetComponent<Card>();
+        Card card = gameObject.GetComponent<Card>();
         string nextCost = card.CostPowerUp(card.PowerUpLevel + 1).ToString();
         string text = textObject.GetComponent<TextMeshProUGUI>().text;
         textObject.GetComponent<TextMeshProUGUI>().text = text.Remove(text.Length - 3, 3) + nextCost;

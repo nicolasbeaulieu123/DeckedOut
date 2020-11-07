@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 3766628820900139881}
   - component: {fileID: 4430912357414505893}
   - component: {fileID: 8740227061803055662}
+  - component: {fileID: 5570191543517729175}
   m_Layer: 5
   m_Name: Death
   m_TagString: Untagged
@@ -94,7 +95,7 @@ MonoBehaviour:
   Name: Death
   Description: Has a chance on each hit to instantly kill the target. The ability
     does not apply to bosses.
-  AccentsColor: {r: 0.21698111, g: 0.21698111, b: 0.21698111, a: 1}
+  AccentsColor: {r: 0.6313726, g: 0.6313726, b: 0.6313726, a: 1}
   BaseAttack: 20
   actualAttack: 0
   BaseAttackSpeed: 1.2
@@ -104,7 +105,7 @@ MonoBehaviour:
   Ability: 9
   AbilityCooldown: 0
   AbilityDescription: Instant Death
-  Target: 1
+  Target: 3
   Type: 1
   UpgradeATK: 4
   UpgradeATKS: 0
@@ -114,7 +115,6 @@ MonoBehaviour:
   PowerUpAbility: 0.5
   PowerUpLevel: 1
   starCount: 1
-  CardObject: {fileID: 0}
 --- !u!225 &-6420979166053864168
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -177,3 +177,17 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &5570191543517729175
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3639919167251686888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7473dec8c0f323418bb400ebc36ec77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pfEnemyInstantDeathAnimation: {fileID: 100004, guid: 7867af58a6ec48846ae807eb4022fbaa,
+    type: 3}

@@ -29,7 +29,7 @@ public class PoisonAbility : MonoBehaviour
                 {
                     targetEnemy.infectedDamageCooldown = basePoisonDamageCooldown;
                     targetEnemy.Damage(gameObject.GetComponent<Card>().actualAbility);
-                    DamagePopup.Create(targetEnemy.GetPosition(), gameObject.GetComponent<Card>().actualAbility, false, "B940FF");
+                    DamagePopup.Create(targetEnemy.GetPosition(), gameObject.GetComponent<Card>().actualAbility, false, ColorUtility.ToHtmlStringRGBA(gameObject.GetComponent<Card>().AccentsColor));
                 }
             }
         }

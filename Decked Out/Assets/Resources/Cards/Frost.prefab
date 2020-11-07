@@ -93,8 +93,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Frost
-  Description: Slows down all enemies. Increased star count will increase the slow
-    effect.
+  Description: Slows down the enemy. Increased star count will slow faster.
   AccentsColor: {r: 0.2627451, g: 0.7294118, b: 0.9960785, a: 1}
   BaseAttack: 30
   actualAttack: 0
@@ -115,7 +114,6 @@ MonoBehaviour:
   PowerUpAbility: 0.02
   PowerUpLevel: 1
   starCount: 1
-  CardObject: {fileID: 0}
 --- !u!225 &-4104815239328660848
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -152,6 +150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b2d01decafd85c4b9378a193a6c0956, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lastEnemy: {fileID: 0}
 --- !u!223 &-8047976927961008606
 Canvas:
   m_ObjectHideFlags: 0

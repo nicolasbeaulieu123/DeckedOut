@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 5640145435449048055}
   - component: {fileID: 4294500865650620995}
   - component: {fileID: -4774426478009678325}
+  - component: {fileID: 7736496841580611700}
   m_Layer: 5
   m_Name: Angel
   m_TagString: Untagged
@@ -99,11 +100,11 @@ MonoBehaviour:
   actualAttack: 0
   BaseAttackSpeed: 0.8
   actualAttackSpeed: 0
-  BaseAbility: 0.1
+  BaseAbility: 1
   actualAbility: 0
   Ability: 7
   AbilityCooldown: 0
-  AbilityDescription: Revive Chance
+  AbilityDescription: Extra Life Chance
   Target: 1
   Type: 2
   UpgradeATK: 5
@@ -114,7 +115,6 @@ MonoBehaviour:
   PowerUpAbility: 0.1
   PowerUpLevel: 1
   starCount: 1
-  CardObject: {fileID: 0}
 --- !u!225 &-6213611983539623809
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -177,3 +177,17 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &7736496841580611700
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5504380036486358524}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26961ce674342624fa90d6e9f2706311, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pfAngelReviveAnimation: {fileID: 100008, guid: e3d819d8722fa1f47a3f68574b56dfb3,
+    type: 3}

@@ -7,26 +7,34 @@ public class CardShoot : MonoBehaviour
     private Vector3 projectileShootFromPosition;
     private float shootTimerMax;
     private float shootTimer;
+    private Card card;
 
     private void Awake()
     {
+        card = transform.parent.GetComponent<Card>();
         projectileShootFromPosition = transform.Find("ProjectileShootFromPosition").position;
-        shootTimerMax = transform.parent.GetComponent<Card>().actualAttackSpeed;
+        shootTimerMax = card.actualAttackSpeed;
+        shootTimer = shootTimerMax / card.starCount * transform.GetSiblingIndex() + shootTimerMax / card.starCount;
+        if (card.starCount == 7)
+            shootTimer = shootTimerMax / card.starCount;
     }
     private void Update()
     {
-        Card card = transform.parent.GetComponent<Card>();
-        Enemy enemy = GetTargetEnemy(card.Target);
-
+        shootTimerMax = card.actualAttackSpeed;
         shootTimer -= Time.deltaTime;
-
         if (shootTimer <= 0f)
         {
-            shootTimer = shootTimerMax;
+            Enemy enemy = GetTargetEnemy(card.Target);
             if (enemy != null)
             {
                 Projectile.Create(projectileShootFromPosition, enemy, card);
+                gameObject.GetComponent<CardShootAnimation>().CardShot();
+                shootTimer = shootTimerMax;
+                if (card.starCount == 7)
+                    shootTimer = shootTimerMax / card.starCount;
             }
+            else
+                shootTimer = shootTimerMax / card.starCount * transform.GetSiblingIndex() + shootTimerMax / card.starCount;
         }
     }
 

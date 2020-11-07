@@ -38,15 +38,21 @@ public class Projectile : MonoBehaviour
             float angle = UtilsClass.GetAngleFromVectorFloat(moveDir) - 90;
             transform.eulerAngles = new Vector3(0, 0, angle);
 
-            float destroySelfDistance = 5f;
+            float destroySelfDistance = 8f;
             if (Vector3.Distance(transform.position, targetPosition) < destroySelfDistance)
             {
-                card.TryActivateAbility(enemy);
-                bool isCrit = Random.Range(0, 101) <= 10;
-                int damageAmount = isCrit ? card.actualAttack * Card.CritDamageBoost / 100 : card.actualAttack;
-                enemy.Damage(damageAmount);
-                DamagePopup.Create(enemy.GetPosition(), damageAmount, isCrit, "000000");
-                Destroy(gameObject);
+                if (card != null)
+                {
+                    card.TryActivateAbility(enemy);
+                    bool isCrit = Random.Range(0, 101) <= 10;
+                    int damageAmount = isCrit ? card.actualAttack * Card.CritDamageBoost / 100 : card.actualAttack;
+                    damageAmount = card.name == "Mechanical(Clone)" && enemy.name.Contains("Boss") ? damageAmount * 2 : damageAmount;
+                    enemy.Damage(damageAmount);
+                    DamagePopup.Create(enemy.GetPosition(), damageAmount, isCrit, "000000");
+                    Destroy(gameObject);
+                }
+                else
+                    Destroy(gameObject);
             }
         }
         else

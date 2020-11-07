@@ -5,7 +5,7 @@ using UnityEngine;
 public class FrostAbility : MonoBehaviour
 {
     public static float totalSlowEffect = 0f;
-    public static Enemy lastEnemy;
+    public Enemy lastEnemy;
     public const float MAX_SLOW_PERCENTAGE = 0.5f;
 
     public void ApplySlowEffect(Enemy enemy, float slowPercentage)

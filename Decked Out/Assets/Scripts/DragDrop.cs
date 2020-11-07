@@ -1,9 +1,11 @@
-﻿using System.Collections;
+﻿using CodeMonkey.Utils;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class DragDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndDragHandler, IDragHandler
+public class DragDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler
 {
     public static DragDrop Instance { get; private set; }
 
@@ -13,6 +15,9 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
     private CanvasGroup canvasGroup;
     private Card card;
     private static GameObject lastParent;
+
+    private GameObject ghostCard;
+    private GameObject originalCard;
     private void Awake()
     {
         Instance = this;
@@ -20,16 +25,15 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
         rectTransform = GetComponent<RectTransform>();
         canvasGroup = GetComponent<CanvasGroup>();
     }
-    public void OnPointerDown(PointerEventData eventData)
-    {
-        lastParent = eventData.pointerEnter.transform.parent.gameObject;
-    }
     public void OnDrag(PointerEventData eventData)
     {
         rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
     }
     public void OnBeginDrag(PointerEventData eventData)
     {
+        lastParent = eventData.pointerDrag.transform.parent.gameObject;
+        originalCard = eventData.pointerDrag.gameObject;
+        ghostCard = CreateGhostCard(originalCard);
         eventData.pointerDrag.GetComponent<Canvas>().overrideSorting = true;
         eventData.pointerDrag.GetComponent<Canvas>().sortingLayerName = "Top";
         canvasGroup.alpha = 0.8f;
@@ -41,20 +45,46 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
         canvasGroup.alpha = 1;
         canvasGroup.blocksRaycasts = true;
         eventData.pointerDrag.GetComponent<Canvas>().overrideSorting = false;
-        if (!eventData.pointerEnter.name.Contains("Slot") && !eventData.pointerEnter.name.Contains("(Clone)"))
+        if (eventData.pointerEnter != null)
         {
-            eventData.pointerDrag.gameObject.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
+            if (!eventData.pointerEnter.name.Contains("(Clone)"))
+            {
+                eventData.pointerDrag.gameObject.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
+            }
         }
+        else
+            eventData.pointerDrag.gameObject.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
         CardMergingManager.Instance.ResetCardsOpacity();
+        Destroy(ghostCard);
+        ghostCard = null;
+        originalCard = null;
     }
 
-    public void SetCard(Card card)
+    private GameObject CreateGhostCard(GameObject card)
     {
-        this.card = card;
+        int indexOfCard = GetCardIndexInDeck(card);
+        GameObject created = Instantiate(PlayerDeck.Deck()[indexOfCard], UtilsClass.GetMouseWorldPosition(), Quaternion.identity);
+        created.transform.SetParent(card.transform.parent.transform);
+        created.GetComponent<RectTransform>().anchoredPosition = Vector3.zero;
+        created.GetComponent<RectTransform>().localScale = new Vector3(0.4f, 0.4f, 0);
+        created.GetComponent<CanvasGroup>().alpha = 0.6f;
+        for (int i = created.transform.childCount; i > 0; i++)
+        {
+            Destroy(created.GetComponent<CardShoot>());
+        }
+        return created;
     }
 
-    public Card GetCard()
-        => card;
+    private int GetCardIndexInDeck(GameObject card)
+    {
+        for (int i = 0; i < PlayerDeck.Deck().Length; i++)
+        {
+            if (card.name.Replace("(Clone)", "") == PlayerDeck.Deck()[i].name)
+                return i;
+        }
+        return -1;
+    }
+
     public GameObject GetLastParent()
         => lastParent;
 }

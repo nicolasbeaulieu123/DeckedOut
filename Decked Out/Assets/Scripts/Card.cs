@@ -106,6 +106,12 @@ public class Card : MonoBehaviour
                 case Abilities.Poison:
                     gameObject.GetComponent<PoisonAbility>().ApplyPoisonEffect(enemy, this.actualAbility);
                     break;
+                case Abilities.Death:
+                    gameObject.GetComponent<DeathAbility>().TryInstantDeath(enemy, this.actualAbility);
+                    break;
+                case Abilities.Angel:
+                    gameObject.GetComponent<AngelAbility>().TryExtraLifeAbility();
+                    break;
             }
         }
     }

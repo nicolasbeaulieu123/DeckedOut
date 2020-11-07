@@ -15,11 +15,13 @@ public class CardMergingManager : MonoBehaviour
     {
         GameObject card1 = parent.transform.GetChild(0).gameObject;
         GameObject card2 = parent.transform.GetChild(1).gameObject;
+        Destroy(card2.GetComponent<DragDrop>().GetLastParent().transform.GetChild(0).gameObject);
         GameObject newCard = GenerateNewCard(parent.transform);
         UpgradeCardStarCount(newCard, card1);
-        StarCountUIManager.UpdateStarCountUI(newCard);
         Destroy(card1);
         Destroy(card2);
+        StarCountUIManager.UpdateStarCountUI(newCard);
+        CardMergingManager.Instance.ResetCardsOpacity();
     }
 
     private GameObject GenerateNewCard(Transform parent)
@@ -39,7 +41,7 @@ public class CardMergingManager : MonoBehaviour
 
     public void ShowAvailableCardsForMerging(GameObject selectedCardObject)
     {
-        GameObject[] cardsOnBoard = Board.Instance.AllCardsOnBoard();
+        List<GameObject> cardsOnBoard = Board.Instance.AllCardsOnBoard();
 
         foreach (GameObject cardObject in cardsOnBoard)
         {
@@ -62,7 +64,7 @@ public class CardMergingManager : MonoBehaviour
     }
     public void ResetCardsOpacity()
     {
-        GameObject[] cardsOnBoard = Board.Instance.AllCardsOnBoard();
+        List<GameObject> cardsOnBoard = Board.Instance.AllCardsOnBoard();
         foreach (GameObject card in cardsOnBoard)
             if (card != null)
             {

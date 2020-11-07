@@ -114,7 +114,6 @@ MonoBehaviour:
   PowerUpAbility: 25
   PowerUpLevel: 1
   starCount: 1
-  CardObject: {fileID: 0}
 --- !u!225 &-3395058137900276648
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -151,6 +150,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2603249f5da13a43a200772c569d50a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pfEnemyPoisonDeathAnimation: {fileID: 100006, guid: 2a474af3f4c27be4e9bdce39cfe4315d,
+    type: 3}
 --- !u!223 &-9137823879906898047
 Canvas:
   m_ObjectHideFlags: 0
