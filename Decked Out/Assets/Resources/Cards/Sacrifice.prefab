@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: -1019589957985611177}
   - component: {fileID: 3370206158285731109}
   - component: {fileID: -1232244967364207337}
+  - component: {fileID: 3733486623465100885}
   m_Layer: 5
   m_Name: Sacrifice
   m_TagString: Untagged
@@ -105,7 +106,7 @@ MonoBehaviour:
   AbilityCooldown: 0
   AbilityDescription: CP per Star
   Target: 1
-  Type: 2
+  Type: 6
   UpgradeATK: 10
   UpgradeATKS: 0
   UpgradeAbility: 0
@@ -114,7 +115,6 @@ MonoBehaviour:
   PowerUpAbility: 0
   PowerUpLevel: 1
   starCount: 1
-  CardObject: {fileID: 0}
 --- !u!225 &-7223639916073808613
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -177,3 +177,15 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &3733486623465100885
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6021916226765652400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 112146adf0bc0fb4eab4ecad6f08f7b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public enum Type { Buff, Magic, Physical, Transform, Debuff, Install }
+public enum Type { Buff, Magic, Physical, Transform, Debuff, Install, Merge }
 public enum Target { None, First, Strongest, Random, Last, NotInfected };
 public enum Abilities { None, Fire, Mechanical, Wind, Poison, Electric, Water, Angel, Time, Death, Rainbow, Sacrifice, Summoner, Boost, Frost }
 
@@ -42,7 +42,7 @@ public class Card : MonoBehaviour
     public float PowerUpAbility;
     public int PowerUpLevel = 1;
     private static int[] PowerUpCosts = { 100, 200, 400, 700, 0 };
-    private int PowerUpCost = PowerUpCosts[0];
+    public int PowerUpCost = PowerUpCosts[0];
 
     public int starCount = 1;
 
@@ -85,16 +85,16 @@ public class Card : MonoBehaviour
 
     private float activateAbilityTimer;
 
-    public void TryActivateAbility(Enemy enemy)
+    public void TryActivateAbility(Enemy enemy = null, bool merged = false, GameObject card = null)
     {
         if (activateAbilityTimer < 0)
         {
             activateAbilityTimer = AbilityCooldown;
-            ActivateAbility(enemy);
+            ActivateAbility(enemy, merged, card);
         }
     }
 
-    private void ActivateAbility(Enemy enemy)
+    private void ActivateAbility(Enemy enemy, bool merged = false, GameObject card = null)
     {
         if (gameObject != null)
         {
@@ -112,6 +112,23 @@ public class Card : MonoBehaviour
                 case Abilities.Angel:
                     gameObject.GetComponent<AngelAbility>().TryExtraLifeAbility();
                     break;
+                case Abilities.Electric:
+                    gameObject.GetComponent<ElectricAbility>().ApplyElectricAbility(enemy);
+                    break;
+                case Abilities.Sacrifice:
+                    gameObject.GetComponent<SacrificeAbility>().AddCPFromMerge(merged);
+                    break;
+                case Abilities.Summoner:
+                    if (card != null)
+                        gameObject.GetComponent<SumonnerAbility>().SummonNewCard(merged, card.GetComponent<Card>());
+                    break;
+                case Abilities.Time:
+                    gameObject.GetComponent<TimeAbility>().TryRewindEnemies();
+                    break;
+                case Abilities.Rainbow:
+                    if (card != null)
+                        gameObject.GetComponent<RainbowAbility>().CopyTargetCard(merged, card.GetComponent<Card>());
+                    break;
             }
         }
     }
@@ -128,4 +145,32 @@ public class Card : MonoBehaviour
         => actualAbility.ToString();
     public string CardDescription()
         => Description.ToString();
+
+    public Card CopyCard()
+    {
+        Card newCard = new Card();
+        newCard.Name = this.Name;
+        newCard.Description = this.Description;
+        newCard.AccentsColor = this.AccentsColor;
+        newCard.BaseAttack = this.BaseAttack;
+        newCard.actualAttack = this.actualAttack;
+        newCard.BaseAbility = this.BaseAbility;
+        newCard.actualAbility = this.actualAbility;
+        newCard.BaseAttackSpeed = this.BaseAttackSpeed;
+        newCard.actualAttackSpeed = this.actualAttackSpeed;
+        newCard.Ability = this.Ability;
+        newCard.AbilityCooldown = this.AbilityCooldown;
+        newCard.AbilityDescription = this.AbilityDescription;
+        newCard.Target = this.Target;
+        newCard.Type = this.Type;
+        newCard.UpgradeATK = this.UpgradeATK;
+        newCard.UpgradeAbility = this.UpgradeAbility;
+        newCard.UpgradeATKS = this.UpgradeATKS;
+        newCard.PowerUpATK = this.PowerUpATK;
+        newCard.PowerUpATKS = this.PowerUpATKS;
+        newCard.PowerUpAbility = this.PowerUpAbility;
+        newCard.PowerUpLevel = this.PowerUpLevel;
+        newCard.PowerUpCost = this.PowerUpCost;
+        return newCard;
+    }
 }

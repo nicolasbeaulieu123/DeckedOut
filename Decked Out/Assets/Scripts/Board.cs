@@ -38,4 +38,16 @@ public class Board : MonoBehaviour
         }
         return cards;
     }
+
+    public bool IsBoardFull()
+    {
+        bool full = true;
+
+        foreach (var item in isFull)
+        {
+            if (!item)
+                full = false;
+        }
+        return full;
+    }
 }

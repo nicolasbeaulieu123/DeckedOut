@@ -11,15 +11,54 @@ public class CardMergingManager : MonoBehaviour
         Instance = this;
     }
 
-    public void CardsMerged(GameObject parent)
+    public void CardsMerged(GameObject selfParent, GameObject targetParent)
     {
-        GameObject card1 = parent.transform.GetChild(0).gameObject;
-        GameObject card2 = parent.transform.GetChild(1).gameObject;
-        Destroy(card2.GetComponent<DragDrop>().GetLastParent().transform.GetChild(0).gameObject);
-        GameObject newCard = GenerateNewCard(parent.transform);
+        GameObject card1;
+        GameObject card2;
+        if (selfParent == targetParent)
+        {
+            card1 = selfParent.transform.GetChild(1).gameObject;
+            card2 = targetParent.transform.GetChild(0).gameObject;
+        }
+        else
+        {
+            card1 = selfParent.transform.GetChild(0).gameObject;
+            card2 = targetParent.transform.GetChild(0).gameObject;
+        }
+        if (card1.GetComponent<Card>().name.Contains("Rainbow") && !card2.GetComponent<Card>().name.Contains("Rainbow"))
+            DestroyImmediate(card1.GetComponent<DragDrop>().GetLastParent().transform.GetChild(1).gameObject);
+        else
+            DestroyImmediate(card1.GetComponent<DragDrop>().GetLastParent().transform.GetChild(0).gameObject);
+        GameObject newCard = GenerateNewCard(targetParent.transform);
         UpgradeCardStarCount(newCard, card1);
-        Destroy(card1);
-        Destroy(card2);
+
+        bool canDeleteCard1 = true;
+        bool canDeleteCard2 = true;
+
+        if (card1.GetComponent<Card>().Type == Type.Merge)
+        {
+            if (card1.GetComponent<Card>().Name == "Sacrifice")
+                card1.GetComponent<Card>().TryActivateAbility(null, true);
+            else if (card1.GetComponent<Card>().Name == "Summoner")
+                card1.GetComponent<Card>().TryActivateAbility(null, true, newCard);
+            else if (card1.GetComponent<Card>().Name == "Rainbow" && !(card1.GetComponent<Card>().Name == "Rainbow" && card2.GetComponent<Card>().Name == "Rainbow"))
+            {
+                card1.GetComponent<Card>().TryActivateAbility(null, true, card2);
+                card1.transform.SetParent(card1.GetComponent<DragDrop>().GetLastParent().transform);
+                Destroy(newCard);
+                canDeleteCard2 = false;
+            }
+        }
+        if (card2.GetComponent<Card>().Type == Type.Merge)
+        {
+            if (card1.GetComponent<Card>().Name == "Sacrifice")
+                card1.GetComponent<Card>().TryActivateAbility(null, true);
+        }
+        
+        if (canDeleteCard1)
+            Destroy(card1);
+        if (canDeleteCard2)
+            Destroy(card2);
         StarCountUIManager.UpdateStarCountUI(newCard);
         CardMergingManager.Instance.ResetCardsOpacity();
     }
@@ -49,7 +88,7 @@ public class CardMergingManager : MonoBehaviour
             {
                 Card card = cardObject.GetComponent<Card>();
                 Card selectedCard = selectedCardObject.GetComponent<Card>();
-                if (!(card.name == selectedCard.name && card.starCount == selectedCard.starCount))
+                if (!(card.name == selectedCard.name && card.starCount == selectedCard.starCount) && !(selectedCard.name.Contains("Rainbow") && card.starCount == selectedCard.starCount))
                 {
                     for (int i = 0; i < cardObject.transform.childCount; i++)
                     {

@@ -15,6 +15,12 @@ public class Projectile : MonoBehaviour
         projectileTransform.SetParent(GameObject.Find("Projectiles").transform);
         Projectile projectile = projectileTransform.GetComponent<Projectile>();
         projectile.Setup(enemy, card);
+
+        if (card.Name == "Rainbow")
+        {
+            projectileGO.AddComponent<HueShifter>();
+            projectileGO.GetComponent<SpriteRenderer>().color = Color.white;
+        }
     }
     private Vector3 targetPosition;
     private Enemy enemy;

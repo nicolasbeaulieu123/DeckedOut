@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 2557485142601284185}
   - component: {fileID: 5076216203996399289}
   - component: {fileID: 5196335476891422243}
+  - component: {fileID: 1510592763800129957}
   m_Layer: 5
   m_Name: Summoner
   m_TagString: Untagged
@@ -105,7 +106,7 @@ MonoBehaviour:
   AbilityCooldown: 0
   AbilityDescription: 
   Target: 1
-  Type: 2
+  Type: 6
   UpgradeATK: 10
   UpgradeATKS: 0
   UpgradeAbility: 0
@@ -114,7 +115,6 @@ MonoBehaviour:
   PowerUpAbility: 0
   PowerUpLevel: 1
   starCount: 1
-  CardObject: {fileID: 0}
 --- !u!225 &776598380098455372
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -177,3 +177,15 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &1510592763800129957
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5571718297841808647}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 131d52a4d2a76cb4380e183d251693a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

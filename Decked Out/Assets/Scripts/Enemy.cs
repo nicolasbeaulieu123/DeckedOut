@@ -6,7 +6,6 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-
     public float speed;
     public float baseSpeed;
     public float health;
@@ -19,7 +18,9 @@ public class Enemy : MonoBehaviour
     public TextMesh healthText;
     private Waypoints Wpoints;
 
-    private int waypointIndex;
+    public int waypointIndex = 1;
+
+    public static bool Rewinding = false;
 
     void Start()
     {
@@ -29,13 +30,26 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         DisplayHealth();
-        transform.position = Vector2.MoveTowards(transform.position, Wpoints.waypoints[waypointIndex].position, speed * Time.deltaTime);
+        int targetIndex;
+        if (!Rewinding)
+        {
+            transform.position = Vector2.MoveTowards(transform.position, Wpoints.waypoints[waypointIndex].position, speed * Time.deltaTime);
+            targetIndex = waypointIndex;
+        }
+        else
+        {
+            targetIndex = waypointIndex - 1 >= 0 ? waypointIndex - 1 : 0;
+            transform.position = Vector2.MoveTowards(transform.position, Wpoints.waypoints[targetIndex].position, speed * Time.deltaTime);
+        }
 
-        if (Vector2.Distance(transform.position, Wpoints.waypoints[waypointIndex].position) < 0.1f)
+        if (Vector2.Distance(transform.position, Wpoints.waypoints[targetIndex].position) < 0.1f)
         {
             if (waypointIndex < Wpoints.waypoints.Length - 1)
             {
-                waypointIndex++;
+                if (!Rewinding)
+                    waypointIndex++;
+                else if (waypointIndex > 0)
+                    waypointIndex--;
             }
             else
             {

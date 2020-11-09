@@ -13,22 +13,30 @@ public class CardSlot : MonoBehaviour, IDropHandler
             Vector3 position = Vector3.zero;
             bool cardsMerged = false;
 
+            Card self = eventData.pointerDrag.GetComponent<Card>();
+            bool selfIsRainbow = self.name.Contains("Rainbow");
+            bool targetIsRainbow = false;
             if (GetTargetCard(gameObject) != null)
             {
-                Card self = eventData.pointerDrag.GetComponent<Card>();
                 Card target = GetTargetCard(gameObject);
-                if (self.name == target.name && self.starCount == target.starCount && self.starCount < 7 && self.tag == target.tag)
+                targetIsRainbow = target.name.Contains("Rainbow");
+                if ((self.name == target.name || selfIsRainbow) && self.starCount == target.starCount && self.tag == target.tag)
                 {
-                    Board.Instance.isFull[Board.FindSlotIdFromName(parent.name) - 1] = false;
-                    parent = gameObject.transform.parent.transform;
-                    position = new Vector2(0, 0);
-                    cardsMerged = true;
+                    if (((!selfIsRainbow && self.starCount < 7) || selfIsRainbow) || (selfIsRainbow && targetIsRainbow && self.starCount < 7))
+                    {
+                        if (!selfIsRainbow || (selfIsRainbow && targetIsRainbow))
+                            Board.Instance.isFull[Board.FindSlotIdFromName(parent.name) - 1] = false;
+                        parent = gameObject.transform.parent.transform;
+                        position = new Vector2(0, 0);
+                        cardsMerged = true;
+                    }
                 }
             }
-            eventData.pointerDrag.transform.SetParent(parent);
+            if (!selfIsRainbow || selfIsRainbow && targetIsRainbow)
+                eventData.pointerDrag.transform.SetParent(parent);
             eventData.pointerDrag.gameObject.GetComponent<RectTransform>().anchoredPosition = position;
             if (cardsMerged)
-                CardMergingManager.Instance.CardsMerged(parent.gameObject);
+                CardMergingManager.Instance.CardsMerged(eventData.pointerDrag.transform.parent.gameObject, parent.gameObject);
         }
     }
 
