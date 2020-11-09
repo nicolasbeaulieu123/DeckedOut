@@ -10,9 +10,10 @@ public class DeathAbility : MonoBehaviour
         if (Random.Range(0, 101) <= instantDeathChance && !enemy.name.Contains("Boss") && !enemy.name.Contains("MiniBoss"))
         {
             DamagePopup.Create(enemy.GetPosition(), enemy.health, false, ColorUtility.ToHtmlStringRGBA(gameObject.GetComponent<Card>().AccentsColor));
-            GameObject pe = Instantiate(pfEnemyInstantDeathAnimation, enemy.GetPosition(), enemy.transform.rotation);
-            pe.transform.SetParent(GameObject.Find("Animations").transform);
-            enemy.Damage(enemy.health);
+            GameObject pe = Instantiate(pfEnemyInstantDeathAnimation);
+            pe.transform.SetParent(GameObject.Find("Animations").transform, false);
+            pe.transform.position = new Vector3(enemy.transform.position.x, enemy.transform.position.y, 0);
+            enemy.Damage(enemy.health, true);
         }
     }
 }

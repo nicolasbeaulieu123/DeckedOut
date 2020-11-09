@@ -20,14 +20,14 @@ public class ElectricAbility : MonoBehaviour
             {
                 damage = abilityDamage * FIRST_ENEMY_DAMAGE_PERCENTAGE / 100;
                 // Creer l'animation d'électrocution
-                first.Damage(damage);
+                first.Damage(damage, true);
                 DamagePopup.Create(first.GetPosition(), damage, false, ColorUtility.ToHtmlStringRGBA(gameObject.GetComponent<Card>().AccentsColor));
             }
             if (second != null)
             {
                 damage = abilityDamage * SECOND_ENEMY_DAMAGE_PERCENTAGE / 100;
                 // Creer l'animation d'électrocution
-                second.Damage(damage);
+                second.Damage(damage, true);
                 DamagePopup.Create(second.GetPosition(), damage, false, ColorUtility.ToHtmlStringRGBA(gameObject.GetComponent<Card>().AccentsColor));
             }
         }

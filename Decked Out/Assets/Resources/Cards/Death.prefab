@@ -114,6 +114,7 @@ MonoBehaviour:
   PowerUpATKS: 0
   PowerUpAbility: 0.5
   PowerUpLevel: 1
+  PowerUpCost: 100
   starCount: 1
 --- !u!225 &-6420979166053864168
 CanvasGroup:
@@ -189,5 +190,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7473dec8c0f323418bb400ebc36ec77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pfEnemyInstantDeathAnimation: {fileID: 100004, guid: 7867af58a6ec48846ae807eb4022fbaa,
+  pfEnemyInstantDeathAnimation: {fileID: 5085104730198710860, guid: 4464076911edce7458c0fe3f0c10a1dc,
     type: 3}

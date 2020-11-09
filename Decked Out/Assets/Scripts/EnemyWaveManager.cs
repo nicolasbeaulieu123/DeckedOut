@@ -7,6 +7,9 @@ public class EnemyWaveManager : MonoBehaviour
 {
     //public event EventHandler OnWaveNumberChanged;
 
+    public GameObject pfEnemyDiedAnim;
+    public static EnemyWaveManager Instance;
+
     private enum State
     {
         WaitingToSpawnNextWave,
@@ -72,11 +75,12 @@ public class EnemyWaveManager : MonoBehaviour
     [SerializeField] private Vector3 spawnPosition = new Vector3(-299.95f, -260.5f);
     private void Start()
     {
+        Instance = this;
         state = State.WaitingToSpawnNextWave;
         nextWaveSpawnTimer = 3f;
     }
 
-    public static void EnemyDied(Enemy enemy, bool killedByPlayer = false)
+    public void EnemyDied(Enemy enemy, bool killedByPlayer = false)
     {
         if (killedByPlayer)
             switch (enemy.name)
@@ -94,6 +98,12 @@ public class EnemyWaveManager : MonoBehaviour
                     PlayerStats.CP += BossCpGainAmount;
                     break;
             }
+        if (!enemy.DeadFromAbility)
+        {
+            GameObject pe = Instantiate(pfEnemyDiedAnim);
+            pe.transform.position = new Vector3(enemy.GetPosition().x, enemy.GetPosition().y, 45);
+            pe.transform.SetParent(GameObject.Find("Animations").transform, true);
+        }
         enemies.Remove(enemy);
         Destroy(enemy.gameObject);
     }

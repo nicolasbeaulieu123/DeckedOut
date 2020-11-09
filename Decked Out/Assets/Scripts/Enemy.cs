@@ -21,6 +21,7 @@ public class Enemy : MonoBehaviour
     public int waypointIndex = 1;
 
     public static bool Rewinding = false;
+    public bool DeadFromAbility = false;
 
     void Start()
     {
@@ -55,7 +56,7 @@ public class Enemy : MonoBehaviour
             {
                 PlayerStats.Lives--;
                 gameObject.GetComponent<Enemy>().health = 0;
-                EnemyWaveManager.EnemyDied(gameObject.GetComponent<Enemy>());
+                EnemyWaveManager.Instance.EnemyDied(gameObject.GetComponent<Enemy>());
                 Destroy(gameObject);
             }
         }
@@ -66,11 +67,15 @@ public class Enemy : MonoBehaviour
         healthText.text = health.ToString();
     }
 
-    public void Damage(float damageAmount)
+    public void Damage(float damageAmount, bool fromAbility = false)
     {
         health -= damageAmount;
         if (IsDead())
-            EnemyWaveManager.EnemyDied(this, true);
+        {
+            if (fromAbility)
+                DeadFromAbility = fromAbility;
+            EnemyWaveManager.Instance.EnemyDied(this, true);
+        }
     }
 
     public bool IsDead()
@@ -86,7 +91,7 @@ public class Enemy : MonoBehaviour
         return enemy;
     }
     public Vector3 GetPosition()
-        => transform.position;
+        => new Vector3(transform.position.x, transform.position.y, 0);
     public static Enemy GetFirstOrLastEnemy(bool first)
     {
         SortEnemyListByDistanceFromEnd();
