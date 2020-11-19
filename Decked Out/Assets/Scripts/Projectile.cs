@@ -7,9 +7,14 @@ public class Projectile : MonoBehaviour
 {
     public static void Create(Vector3 spawnPosition, Enemy enemy, Card card)
     {
-        GameObject projectileGO = Instantiate(Resources.Load<GameObject>("Projectile"), spawnPosition, Quaternion.identity);
-        projectileGO.GetComponent<SpriteRenderer>().color = card.AccentsColor;
-        projectileGO.GetComponent<SpriteRenderer>().sortingOrder = 1;
+        GameObject projectileGO = Instantiate(Resources.Load<GameObject>("Projectile2"), spawnPosition, Quaternion.identity);
+        Color color = card.AccentsColor;
+        if (card.AccentsColor == Color.black)
+            color = Color.white;
+        projectileGO.GetComponent<ParticleSystem>().startColor = color;
+        projectileGO.transform.Find("Particles").GetComponent<ParticleSystem>().startColor = color;
+        projectileGO.transform.Find("Beam").GetComponent<ParticleSystem>().startColor = color;
+        projectileGO.transform.Find("Circle").GetComponent<ParticleSystem>().startColor = color;
         projectileGO.transform.SetParent(GameObject.Find("Board").transform);
         Transform projectileTransform = projectileGO.transform;
         projectileTransform.SetParent(GameObject.Find("Projectiles").transform);
@@ -17,10 +22,7 @@ public class Projectile : MonoBehaviour
         projectile.Setup(enemy, card);
 
         if (card.Name == "Rainbow")
-        {
             projectileGO.AddComponent<HueShifter>();
-            projectileGO.GetComponent<SpriteRenderer>().color = Color.white;
-        }
     }
     private Vector3 targetPosition;
     private Enemy enemy;

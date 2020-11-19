@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.Mathematics;
 using UnityEngine;
 
@@ -9,13 +10,15 @@ public class Enemy : MonoBehaviour
     public float speed;
     public float baseSpeed;
     public float health;
+    public float startingHealth;
     public float armor;
     public float CPGainAmount;
 
     public bool Infected = false;
+    public float infectedCount = 0;
     public float infectedDamageCooldown;
 
-    public TextMesh healthText;
+    public TextMeshPro healthText;
     private Waypoints Wpoints;
 
     public int waypointIndex = 1;
@@ -70,6 +73,7 @@ public class Enemy : MonoBehaviour
     public void DisplayHealth()
     {
         healthText.text = health.ToString();
+        healthText.color = Color.Lerp(Color.red, Color.green, health / startingHealth);
     }
 
     public void Damage(float damageAmount, bool fromAbility = false)

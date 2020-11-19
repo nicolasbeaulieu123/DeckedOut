@@ -84,6 +84,7 @@ public class BossMagicianAbility : MonoBehaviour
             GameObject destroyCardAnim = Instantiate(pfAbilityCardAnimation);
             destroyCardAnim.transform.position = new Vector3(card.transform.position.x, card.transform.position.y, 0);
             destroyCardAnim.transform.SetParent(GameObject.Find("Animations").transform, true);
+            Board.Instance.isFull[Board.FindSlotIdFromName(card.transform.parent.name)] = false;
             Destroy(card);
         }
     }

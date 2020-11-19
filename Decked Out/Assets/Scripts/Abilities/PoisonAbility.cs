@@ -13,9 +13,12 @@ public class PoisonAbility : MonoBehaviour
         if (!enemy.Infected)
         {
             enemy.Infected = true;
+            enemy.infectedCount++;
             enemy.infectedDamageCooldown = basePoisonDamageCooldown;
             infectedEnemies.Add(enemy);
         }
+        else
+            enemy.infectedCount = enemy.infectedCount < 5 ? enemy.infectedCount + 0.2f : 5;
     }
 
     private void Update()
@@ -29,14 +32,14 @@ public class PoisonAbility : MonoBehaviour
                 if (targetEnemy.infectedDamageCooldown < 0)
                 {
                     targetEnemy.infectedDamageCooldown = basePoisonDamageCooldown;
-                    targetEnemy.Damage(gameObject.GetComponent<Card>().actualAbility, true);
+                    targetEnemy.Damage(gameObject.GetComponent<Card>().actualAbility * targetEnemy.infectedCount, true);
                     if (targetEnemy.health <= 0)
                     {
                         GameObject pe = Instantiate(pfPoisonCloud);
                         pe.transform.position = new Vector3(targetEnemy.GetPosition().x, targetEnemy.GetPosition().y, 45);
                         pe.transform.SetParent(GameObject.Find("Animations").transform, true);
                     }
-                    DamagePopup.Create(targetEnemy.GetPosition(), gameObject.GetComponent<Card>().actualAbility, false, ColorUtility.ToHtmlStringRGBA(gameObject.GetComponent<Card>().AccentsColor));
+                    DamagePopup.Create(targetEnemy.GetPosition(), (int)(gameObject.GetComponent<Card>().actualAbility * targetEnemy.infectedCount), false, ColorUtility.ToHtmlStringRGBA(gameObject.GetComponent<Card>().AccentsColor));
                 }
             }
         }

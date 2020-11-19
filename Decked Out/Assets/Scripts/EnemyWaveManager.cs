@@ -182,6 +182,7 @@ public class EnemyWaveManager : MonoBehaviour
             nEnemyHp = nEnemyHp + nEnemyHpScale;
             Enemy created = Enemy.Create(spawnPosition, EnemyTypes.Square + "Enemy");
             created.GetComponent<Enemy>().health = nEnemyHp;
+            created.GetComponent<Enemy>().startingHealth = nEnemyHp;
             enemies.Add(created);
             normalEnemiesRemaining--;
             remainingEnemySpawnAmount--;
