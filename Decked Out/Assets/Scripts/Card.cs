@@ -48,6 +48,9 @@ public class Card : MonoBehaviour
 
     public static int CritDamageBoost = 500;
 
+    public bool canShoot = true;
+    public bool canMerge = true;
+
     public void Awake()
     {
         actualAbility = BaseAbility;
@@ -128,6 +131,9 @@ public class Card : MonoBehaviour
                 case Abilities.Rainbow:
                     if (card != null)
                         gameObject.GetComponent<RainbowAbility>().CopyTargetCard(merged, card.GetComponent<Card>());
+                    break;
+                case Abilities.Fire:
+                    gameObject.GetComponent<FireAbility>().ApplySplashDamage(enemy.transform);
                     break;
             }
         }

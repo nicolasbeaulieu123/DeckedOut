@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: -8403555999754010732}
   - component: {fileID: 6811434725006843279}
   - component: {fileID: -6113357365416238376}
+  - component: {fileID: 8296973967698628607}
   m_Layer: 5
   m_Name: Fire
   m_TagString: Untagged
@@ -113,8 +114,10 @@ MonoBehaviour:
   PowerUpATKS: 0
   PowerUpAbility: 20
   PowerUpLevel: 1
+  PowerUpCost: 100
   starCount: 1
-  CardObject: {fileID: 0}
+  canShoot: 1
+  canMerge: 1
 --- !u!225 &-1249320340363473618
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -177,3 +180,20 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &8296973967698628607
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8450444320842655581}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e1236562b7890649930ff84f30f3b0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  splashRange: 52
+  pfAbilityAnimation: {fileID: 5792186369768282591, guid: f1679360de0f59f439704f0bfd87b921,
+    type: 3}
+  pfDeathAnimation: {fileID: 4212501932602527560, guid: 6c96b9a6e1ee76f4aa8304565cd42736,
+    type: 3}

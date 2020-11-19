@@ -103,6 +103,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5279802191971249028}
   - component: {fileID: 6912730866529190726}
+  - component: {fileID: 8359508922694499408}
   m_Layer: 0
   m_Name: SquareEnemy
   m_TagString: Untagged
@@ -143,7 +144,38 @@ MonoBehaviour:
   health: 200
   armor: 0
   CPGainAmount: 0
+  Infected: 0
+  infectedDamageCooldown: 0
   healthText: {fileID: 8008405456576256997}
+  waypointIndex: 1
+  Stopped: 0
+  DeadFromAbility: 0
+--- !u!61 &8359508922694499408
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5329402412806964201}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.041748047, y: -0.0000038146973}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 10.0152, y: 9.931717}
+  m_EdgeRadius: 0
 --- !u!1 &7780205727865969491
 GameObject:
   m_ObjectHideFlags: 0

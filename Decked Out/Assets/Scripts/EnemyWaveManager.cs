@@ -15,7 +15,7 @@ public class EnemyWaveManager : MonoBehaviour
         WaitingToSpawnNextWave,
         SpawningWave,
     }
-    private enum EnemyTypes
+    public enum EnemyTypes
     {
         Circle,
         Square,
@@ -23,10 +23,19 @@ public class EnemyWaveManager : MonoBehaviour
         Boss
     }
 
+    public enum BossTypes
+    {
+        None,
+        Magician,
+        Serpent,
+        Joker,
+        Silencer
+    }
+
     public static List<Enemy> enemies = new List<Enemy>();
 
     private State state;
-    private int waveNumber = 0;
+    [SerializeField] private int waveNumber = 0;
     private float nextWaveSpawnTimer;
     private float nextEnemySpawnTimer;
     private int remainingEnemySpawnAmount;
@@ -72,32 +81,28 @@ public class EnemyWaveManager : MonoBehaviour
     private static int BossCpGainAmountMod = 100;
     private const int MAX_BOSS_CP_GAIN_AMOUNT = 500;
 
+    private BossTypes lastBoss;
+
     [SerializeField] private Vector3 spawnPosition = new Vector3(-299.95f, -260.5f);
     private void Start()
     {
         Instance = this;
         state = State.WaitingToSpawnNextWave;
         nextWaveSpawnTimer = 3f;
+        lastBoss = BossTypes.None;
     }
 
-    public void EnemyDied(Enemy enemy, bool killedByPlayer = false)
+    public void EnemyDied(Enemy enemy, bool CpAlreadyGained, bool killedByPlayer = false)
     {
-        if (killedByPlayer)
-            switch (enemy.name)
-            {
-                case "SquareEnemy(Clone)":
-                    PlayerStats.CP += EnemyCpGainAmount;
-                    break;
-                case "CircleEnemy(Clone)":
-                    PlayerStats.CP += EnemyCpGainAmount;
-                    break;
-                case "MiniBossEnemy(Clone)":
-                    PlayerStats.CP += MiniBossCpGainAmount;
-                    break;
-                case "BossEnemy(Clone)":
-                    PlayerStats.CP += BossCpGainAmount;
-                    break;
-            }
+        if (killedByPlayer && !CpAlreadyGained)
+            if (enemy.name.Contains("Square"))
+                PlayerStats.CP += EnemyCpGainAmount;
+            else if (enemy.name.Contains("Circle"))
+                PlayerStats.CP += EnemyCpGainAmount;
+            else if (enemy.name.Contains("MiniBoss"))
+                PlayerStats.CP += MiniBossCpGainAmount;
+            else if (enemy.name.Contains("Boss"))
+                PlayerStats.CP += BossCpGainAmount;
         if (!enemy.DeadFromAbility)
         {
             GameObject pe = Instantiate(pfEnemyDiedAnim);
@@ -105,6 +110,8 @@ public class EnemyWaveManager : MonoBehaviour
             pe.transform.SetParent(GameObject.Find("Animations").transform, true);
         }
         enemies.Remove(enemy);
+        if (enemy.name.Contains("Silencer"))
+            enemy.GetComponent<BossSilencerAbility>().IsDead();
         Destroy(enemy.gameObject);
     }
 
@@ -150,7 +157,13 @@ public class EnemyWaveManager : MonoBehaviour
     {
         if (bossRemaining > 0)
         {
-            Enemy created = Enemy.Create(spawnPosition, EnemyTypes.Boss + "Enemy");
+            BossTypes nextBoss;
+            do
+            {
+                nextBoss = (BossTypes)UnityEngine.Random.Range(0, Enum.GetNames(typeof(BossTypes)).Length);
+            } while (nextBoss == lastBoss);
+            lastBoss = nextBoss;
+            Enemy created = Enemy.Create(spawnPosition, nextBoss + "BossEnemy");
             enemies.Add(created);
             created.GetComponent<Enemy>().health = (int)(64.176 * Math.Pow(waveNumber, 2.8152) + (0.2755 * Math.Pow(waveNumber, 4) - 13.32 * Math.Pow(waveNumber, 3) - 10.387 * Math.Pow(waveNumber, 2) + 1921.6 * waveNumber - 2528.7));
             bossRemaining--;
@@ -202,7 +215,7 @@ public class EnemyWaveManager : MonoBehaviour
         {
             miniBossRemaining = 1;
             fastEnemiesRemaining = nextFastEnemiesAmount;
-            nextFastEnemiesAmount = nextFastEnemiesAmount < MAX_FAST_ENEMIES_AMOUNT ? nextFastEnemiesAmount++ : nextFastEnemiesAmount;
+            nextFastEnemiesAmount = nextFastEnemiesAmount < MAX_FAST_ENEMIES_AMOUNT ? nextFastEnemiesAmount + 1 : nextFastEnemiesAmount;
             normalEnemiesRemaining = remainingEnemySpawnAmount - miniBossRemaining - fastEnemiesRemaining;
             MiniBossCpGainAmount = waveNumber > 5 && MiniBossCpGainAmount < MAX_MINIBOSS_CP_GAIN_AMOUNT ? MiniBossCpGainAmount + MiniBossCpGainAmountMod : MiniBossCpGainAmount;
         }

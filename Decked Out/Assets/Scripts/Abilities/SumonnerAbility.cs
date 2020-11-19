@@ -4,8 +4,12 @@ using UnityEngine;
 
 public class SumonnerAbility : MonoBehaviour
 {
-    private static Board board = Board.Instance;
+    private static Board board;
 
+    private void Start()
+    {
+        board = Board.Instance;
+    }
     public void SummonNewCard(bool merged, Card oldCard)
     {
         if (!board.IsBoardFull() && merged)

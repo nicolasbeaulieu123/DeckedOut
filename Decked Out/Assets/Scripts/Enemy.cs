@@ -21,7 +21,9 @@ public class Enemy : MonoBehaviour
     public int waypointIndex = 1;
 
     public static bool Rewinding = false;
+    public bool Stopped = false;
     public bool DeadFromAbility = false;
+    private bool CpAlreadyGained = false;
 
     void Start()
     {
@@ -31,16 +33,16 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         DisplayHealth();
-        int targetIndex;
-        if (!Rewinding)
+        int targetIndex = waypointIndex;
+        if (!Stopped)
         {
-            transform.position = Vector2.MoveTowards(transform.position, Wpoints.waypoints[waypointIndex].position, speed * Time.deltaTime);
-            targetIndex = waypointIndex;
-        }
-        else
-        {
-            targetIndex = waypointIndex - 1 >= 0 ? waypointIndex - 1 : 0;
-            transform.position = Vector2.MoveTowards(transform.position, Wpoints.waypoints[targetIndex].position, speed * Time.deltaTime);
+            if (!Rewinding)
+                transform.position = Vector2.MoveTowards(transform.position, Wpoints.waypoints[waypointIndex].position, speed * Time.deltaTime);
+            else
+            {
+                targetIndex = waypointIndex - 1 >= 0 ? waypointIndex - 1 : 0;
+                transform.position = Vector2.MoveTowards(transform.position, Wpoints.waypoints[targetIndex].position, speed * Time.deltaTime);
+            }
         }
 
         if (Vector2.Distance(transform.position, Wpoints.waypoints[targetIndex].position) < 0.1f)
@@ -54,9 +56,12 @@ public class Enemy : MonoBehaviour
             }
             else
             {
-                PlayerStats.Lives--;
+                if (gameObject.name.Contains("Boss"))
+                    PlayerStats.Lives -= 2;
+                else
+                    PlayerStats.Lives--;
                 gameObject.GetComponent<Enemy>().health = 0;
-                EnemyWaveManager.Instance.EnemyDied(gameObject.GetComponent<Enemy>());
+                EnemyWaveManager.Instance.EnemyDied(this, CpAlreadyGained);
                 Destroy(gameObject);
             }
         }
@@ -69,12 +74,13 @@ public class Enemy : MonoBehaviour
 
     public void Damage(float damageAmount, bool fromAbility = false)
     {
-        health -= damageAmount;
+        health = (int)(health - damageAmount);
         if (IsDead())
         {
             if (fromAbility)
                 DeadFromAbility = fromAbility;
-            EnemyWaveManager.Instance.EnemyDied(this, true);
+            EnemyWaveManager.Instance.EnemyDied(this, CpAlreadyGained, true);
+            CpAlreadyGained = true;
         }
     }
 

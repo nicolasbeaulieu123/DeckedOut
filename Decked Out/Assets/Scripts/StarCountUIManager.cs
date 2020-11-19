@@ -19,6 +19,10 @@ public static class StarCountUIManager
     {
         Card card = go.GetComponent<Card>();
         GameObject starPrefab = Resources.Load<GameObject>("Star");
+        for (int i = 0; i < go.transform.childCount; i++)
+        {
+            GameObject.Destroy(go.transform.GetChild(i).gameObject);
+        }
         if (card.starCount != 7)
         {
             for (int i = 0; i < card.starCount; i++)

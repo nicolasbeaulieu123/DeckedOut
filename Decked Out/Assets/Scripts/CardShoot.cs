@@ -20,21 +20,24 @@ public class CardShoot : MonoBehaviour
     }
     private void Update()
     {
-        shootTimerMax = card.actualAttackSpeed;
-        shootTimer -= Time.deltaTime;
-        if (shootTimer <= 0f)
+        if (card.canShoot)
         {
-            Enemy enemy = GetTargetEnemy(card.Target);
-            if (enemy != null)
+            shootTimerMax = card.actualAttackSpeed;
+            shootTimer -= Time.deltaTime;
+            if (shootTimer <= 0f)
             {
-                Projectile.Create(projectileShootFromPosition, enemy, card);
-                gameObject.GetComponent<CardShootAnimation>().CardShot();
-                shootTimer = shootTimerMax;
-                if (card.starCount == 7)
-                    shootTimer = shootTimerMax / card.starCount;
+                Enemy enemy = GetTargetEnemy(card.Target);
+                if (enemy != null)
+                {
+                    Projectile.Create(projectileShootFromPosition, enemy, card);
+                    gameObject.GetComponent<CardShootAnimation>().CardShot();
+                    shootTimer = shootTimerMax;
+                    if (card.starCount == 7)
+                        shootTimer = shootTimerMax / card.starCount;
+                }
+                else
+                    shootTimer = shootTimerMax / card.starCount * transform.GetSiblingIndex() + shootTimerMax / card.starCount;
             }
-            else
-                shootTimer = shootTimerMax / card.starCount * transform.GetSiblingIndex() + shootTimerMax / card.starCount;
         }
     }
 

@@ -7,7 +7,7 @@ public class CardSlot : MonoBehaviour, IDropHandler
 {
     public void OnDrop(PointerEventData eventData)
     {
-        if (eventData.pointerDrag != null)
+        if (eventData.pointerDrag != null && eventData.pointerDrag.GetComponent<Card>().canMerge)
         {
             Transform parent = DragDrop.Instance.GetLastParent().transform;
             Vector3 position = Vector3.zero;
@@ -15,16 +15,17 @@ public class CardSlot : MonoBehaviour, IDropHandler
 
             Card self = eventData.pointerDrag.GetComponent<Card>();
             bool selfIsRainbow = self.name.Contains("Rainbow");
+            bool selfIsBoost = self.name.Contains("Boost");
             bool targetIsRainbow = false;
             if (GetTargetCard(gameObject) != null)
             {
                 Card target = GetTargetCard(gameObject);
                 targetIsRainbow = target.name.Contains("Rainbow");
-                if ((self.name == target.name || selfIsRainbow) && self.starCount == target.starCount && self.tag == target.tag)
+                if ((self.name == target.name || selfIsRainbow || selfIsBoost) && self.starCount == target.starCount && self.tag == target.tag)
                 {
-                    if (((!selfIsRainbow && self.starCount < 7) || selfIsRainbow) || (selfIsRainbow && targetIsRainbow && self.starCount < 7))
+                    if (((!selfIsRainbow && self.starCount < 7) || selfIsRainbow || selfIsBoost) || (selfIsRainbow && targetIsRainbow && self.starCount < 7))
                     {
-                        if (!selfIsRainbow || (selfIsRainbow && targetIsRainbow))
+                        if (!selfIsRainbow || (selfIsRainbow && targetIsRainbow) || selfIsBoost)
                             Board.Instance.isFull[Board.FindSlotIdFromName(parent.name) - 1] = false;
                         parent = gameObject.transform.parent.transform;
                         position = new Vector2(0, 0);

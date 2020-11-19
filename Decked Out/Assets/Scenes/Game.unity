@@ -682,6 +682,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pfEnemyDiedAnim: {fileID: 472185239550514482, guid: cf39c3197ff4a2b44afca3f9d3f41f43,
     type: 3}
+  waveNumber: 0
   spawnPosition: {x: -299.95, y: -290.5, z: 0}
 --- !u!4 &258240555
 Transform:
@@ -4927,36 +4928,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1935973310}
   m_CullTransparentMesh: 0
---- !u!1 &1987418108
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1987418109}
-  m_Layer: 0
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1987418109
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1987418108}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 11.605562, y: 1.2561142, z: -2493.375}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 12
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1991092833
 GameObject:
   m_ObjectHideFlags: 0

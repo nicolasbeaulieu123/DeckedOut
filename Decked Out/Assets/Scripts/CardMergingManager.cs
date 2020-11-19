@@ -48,6 +48,13 @@ public class CardMergingManager : MonoBehaviour
                 Destroy(newCard);
                 canDeleteCard2 = false;
             }
+            else if (card1.GetComponent<Card>().Name == "Boost")
+            {
+                card2.GetComponent<Card>().starCount++;
+                StarCountUIManager.UpdateStarCountUI(card2);
+                Destroy(newCard);
+                canDeleteCard2 = false;
+            }
         }
         if (card2.GetComponent<Card>().Type == Type.Merge)
         {
@@ -59,7 +66,8 @@ public class CardMergingManager : MonoBehaviour
             Destroy(card1);
         if (canDeleteCard2)
             Destroy(card2);
-        StarCountUIManager.UpdateStarCountUI(newCard);
+        if (newCard != null)
+            StarCountUIManager.UpdateStarCountUI(newCard);
         CardMergingManager.Instance.ResetCardsOpacity();
     }
 
@@ -88,7 +96,7 @@ public class CardMergingManager : MonoBehaviour
             {
                 Card card = cardObject.GetComponent<Card>();
                 Card selectedCard = selectedCardObject.GetComponent<Card>();
-                if (!(card.name == selectedCard.name && card.starCount == selectedCard.starCount) && !(selectedCard.name.Contains("Rainbow") && card.starCount == selectedCard.starCount))
+                if (!(card.name == selectedCard.name && card.starCount == selectedCard.starCount) && !(selectedCard.name.Contains("Rainbow") && card.starCount == selectedCard.starCount) && !(selectedCard.name.Contains("Boost") && card.starCount == selectedCard.starCount))
                 {
                     for (int i = 0; i < cardObject.transform.childCount; i++)
                     {

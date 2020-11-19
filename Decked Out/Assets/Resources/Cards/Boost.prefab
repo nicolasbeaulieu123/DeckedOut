@@ -69,7 +69,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 5edbddfaaa355ef4e9c002f1a9ff9a48, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 13b7dc8108c69b84bb2413a1dbdc38d6, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -94,7 +94,7 @@ MonoBehaviour:
   Name: Boost
   Description: Increases the star count of the target card without changing it's
     type.
-  AccentsColor: {r: 0, g: 0, b: 0, a: 0}
+  AccentsColor: {r: 0.59607846, g: 0.14509805, b: 0.6862745, a: 1}
   BaseAttack: 10
   actualAttack: 0
   BaseAttackSpeed: 1.5
@@ -105,7 +105,7 @@ MonoBehaviour:
   AbilityCooldown: 0
   AbilityDescription: 
   Target: 1
-  Type: 2
+  Type: 6
   UpgradeATK: 10
   UpgradeATKS: 0
   UpgradeAbility: 0
@@ -113,8 +113,10 @@ MonoBehaviour:
   PowerUpATKS: 0
   PowerUpAbility: 0
   PowerUpLevel: 1
+  PowerUpCost: 100
   starCount: 1
-  CardObject: {fileID: 0}
+  canShoot: 1
+  canMerge: 1
 --- !u!225 &-8143648127374181094
 CanvasGroup:
   m_ObjectHideFlags: 0

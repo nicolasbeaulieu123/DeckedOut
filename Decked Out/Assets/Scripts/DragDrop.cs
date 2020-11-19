@@ -27,37 +27,44 @@ public class DragDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
     }
     public void OnDrag(PointerEventData eventData)
     {
-        rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
+        if (eventData.pointerDrag.GetComponent<Card>().canMerge)
+            rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
     }
     public void OnBeginDrag(PointerEventData eventData)
     {
-        lastParent = eventData.pointerDrag.transform.parent.gameObject;
-        originalCard = eventData.pointerDrag.gameObject;
-        ghostCard = CreateGhostCard(originalCard);
-        eventData.pointerDrag.GetComponent<Canvas>().overrideSorting = true;
-        eventData.pointerDrag.GetComponent<Canvas>().sortingLayerName = "Top";
-        canvasGroup.alpha = 0.8f;
-        canvasGroup.blocksRaycasts = false;
-        CardMergingManager.Instance.ShowAvailableCardsForMerging(eventData.pointerDrag.gameObject);
+        if (eventData.pointerDrag.GetComponent<Card>().canMerge)
+        {
+            lastParent = eventData.pointerDrag.transform.parent.gameObject;
+            originalCard = eventData.pointerDrag.gameObject;
+            ghostCard = CreateGhostCard(originalCard);
+            eventData.pointerDrag.GetComponent<Canvas>().overrideSorting = true;
+            eventData.pointerDrag.GetComponent<Canvas>().sortingLayerName = "Top";
+            canvasGroup.alpha = 0.8f;
+            canvasGroup.blocksRaycasts = false;
+            CardMergingManager.Instance.ShowAvailableCardsForMerging(eventData.pointerDrag.gameObject);
+        }
     }
     public void OnEndDrag(PointerEventData eventData)
     {
-        canvasGroup.alpha = 1;
-        canvasGroup.blocksRaycasts = true;
-        eventData.pointerDrag.GetComponent<Canvas>().overrideSorting = false;
-        if (eventData.pointerEnter != null)
+        if (eventData.pointerDrag.GetComponent<Card>().canMerge)
         {
-            if (!eventData.pointerEnter.name.Contains("(Clone)"))
+            canvasGroup.alpha = 1;
+            canvasGroup.blocksRaycasts = true;
+            eventData.pointerDrag.GetComponent<Canvas>().overrideSorting = false;
+            if (eventData.pointerEnter != null)
             {
-                eventData.pointerDrag.gameObject.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
+                if (!eventData.pointerEnter.name.Contains("(Clone)"))
+                {
+                    eventData.pointerDrag.gameObject.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
+                }
             }
+            else
+                eventData.pointerDrag.gameObject.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
+            CardMergingManager.Instance.ResetCardsOpacity();
+            Destroy(ghostCard);
+            ghostCard = null;
+            originalCard = null;
         }
-        else
-            eventData.pointerDrag.gameObject.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
-        CardMergingManager.Instance.ResetCardsOpacity();
-        Destroy(ghostCard);
-        ghostCard = null;
-        originalCard = null;
     }
 
     private GameObject CreateGhostCard(GameObject card)
