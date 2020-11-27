@@ -66,6 +66,9 @@ public class Enemy : MonoBehaviour
                 gameObject.GetComponent<Enemy>().health = 0;
                 EnemyWaveManager.Instance.EnemyDied(this, CpAlreadyGained);
                 Destroy(gameObject);
+
+                if (PlayerStats.Lives <= 0)
+                    EnemyWaveManager.Instance.PlayerDied();
             }
         }
     }
@@ -79,6 +82,7 @@ public class Enemy : MonoBehaviour
     public void Damage(float damageAmount, bool fromAbility = false)
     {
         health = (int)(health - damageAmount);
+        PlayerStats.TotalDamage += (int)damageAmount;
         if (IsDead())
         {
             if (fromAbility)

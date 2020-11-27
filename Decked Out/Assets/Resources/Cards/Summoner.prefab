@@ -96,6 +96,7 @@ MonoBehaviour:
   Description: Summons a random card when merged. The summoned card's star count
     is random from 1 to merged card star count.
   AccentsColor: {r: 0.38039216, g: 0.87058824, b: 0.33333334, a: 1}
+  CardPrice: 8000
   BaseAttack: 10
   actualAttack: 0
   BaseAttackSpeed: 1.5
@@ -114,7 +115,10 @@ MonoBehaviour:
   PowerUpATKS: 0
   PowerUpAbility: 0
   PowerUpLevel: 1
+  PowerUpCost: 100
   starCount: 1
+  canShoot: 1
+  canMerge: 1
 --- !u!225 &776598380098455372
 CanvasGroup:
   m_ObjectHideFlags: 0

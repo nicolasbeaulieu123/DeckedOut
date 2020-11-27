@@ -95,6 +95,7 @@ MonoBehaviour:
   Name: Wind
   Description: Has the fastest attack speed of all cards.
   AccentsColor: {r: 0.18823531, g: 0.43137258, b: 1, a: 1}
+  CardPrice: 2000
   BaseAttack: 20
   actualAttack: 0
   BaseAttackSpeed: 0.45
@@ -113,7 +114,10 @@ MonoBehaviour:
   PowerUpATKS: 0
   PowerUpAbility: 10
   PowerUpLevel: 1
+  PowerUpCost: 100
   starCount: 1
+  canShoot: 1
+  canMerge: 1
 --- !u!225 &-8981068600158976917
 CanvasGroup:
   m_ObjectHideFlags: 0

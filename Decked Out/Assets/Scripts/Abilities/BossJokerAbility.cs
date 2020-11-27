@@ -38,6 +38,7 @@ public class BossJokerAbility : MonoBehaviour
                     pe = Instantiate(pfAbilityAnimation);
                     pe.transform.position = new Vector3(Boss.GetPosition().x, Boss.GetPosition().y, 45);
                     pe.transform.SetParent(GameObject.Find("Animations").transform, true);
+                    SoundManager.PlaySound(GameAssets.Instance.Boss_Knight_Charge);
                 }
                 if (changeCardsCooldown < 0)
                 {
@@ -54,6 +55,7 @@ public class BossJokerAbility : MonoBehaviour
     void ActivateAbility()
     {
         List<GameObject> cards = Board.Instance.AllCardsOnBoard();
+        SoundManager.PlaySound(GameAssets.Instance.Boss_Knight_Poof);
         for (int i = 0; i < cards.Count; i++)
         {
             Card card = cards[i].GetComponent<Card>();
@@ -65,7 +67,7 @@ public class BossJokerAbility : MonoBehaviour
             cardAnim.transform.SetParent(GameObject.Find("Animations").transform, true);
 
             GameObject created = Instantiate(PlayerDeck.Deck()[Random.Range(0, 5)], oldPosition.parent, false);
-            created.transform.localScale = new Vector3(0.4f, 0.4f, 1);
+            created.transform.localScale = new Vector3(1.4f, 1.4f, 0);
             created.GetComponent<Card>().starCount = oldStartCount;
             created.AddComponent<DragDrop>();
             created.GetComponent<DragDrop>().canvas = GameObject.Find("Canvas").GetComponent<Canvas>();

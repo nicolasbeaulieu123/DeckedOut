@@ -7,8 +7,9 @@ using UnityEngine.EventSystems;
 
 public class PlayerDeck : MonoBehaviour, IPointerDownHandler
 {
-    private static bool loaded = false;
-    public void Start()
+    public static bool loaded = false;
+    [SerializeField] GameObject[] deckCardsBase;
+    void Start()
     {
         if (!loaded)
             LoadPlayerDeckImages();
@@ -30,7 +31,7 @@ public class PlayerDeck : MonoBehaviour, IPointerDownHandler
             }
         }
     }
-    private void ChangeCardLevelText()
+    void ChangeCardLevelText()
     {
         int index = gameObject.transform.GetSiblingIndex() + 1;
         GameObject textObject = GameObject.Find("DeckCardLevels").transform.Find("CardLvl (" + index + ")").gameObject;
@@ -40,7 +41,7 @@ public class PlayerDeck : MonoBehaviour, IPointerDownHandler
         textObject.GetComponent<TextMeshProUGUI>().text = text.Remove(text.Length - 1, 1) + newLevel;
     }
 
-    private void ChangeCardPowerUpCostText()
+    void ChangeCardPowerUpCostText()
     {
         int index = gameObject.transform.GetSiblingIndex() + 1;
         GameObject textObject = GameObject.Find("DeckCardPowerUpCosts").transform.Find("CardLvlPrice (" + index + ")").gameObject;
@@ -49,16 +50,15 @@ public class PlayerDeck : MonoBehaviour, IPointerDownHandler
         string text = textObject.GetComponent<TextMeshProUGUI>().text;
         textObject.GetComponent<TextMeshProUGUI>().text = text.Remove(text.Length - 3, 3) + nextCost;
     }
-    public static void LoadPlayerDeckImages()
+    void LoadPlayerDeckImages()
     {
         for (int i = 1; i <= 5; i++)
         {
-            GameObject card = GameObject.Find("Deck").transform.Find("Card (" + i + ")").gameObject;
-            float x = card.GetComponent<RectTransform>().position.x;
-            float y = card.GetComponent<RectTransform>().position.y;
-            GameObject.Destroy(card);
+            float x = deckCardsBase[i - 1].transform.position.x;
+            float y = deckCardsBase[i - 1].transform.position.y;
+            GameObject.Destroy(deckCardsBase[i - 1]);
             GameObject created = GameObject.Instantiate(Deck()[i - 1], new Vector2(x, y), Quaternion.identity);
-            created.transform.localScale = new Vector3(0.5f, 0.5f, 1);
+            created.transform.localScale = new Vector3(0.7f, 0.7f, 1);
             created.transform.SetParent(GameObject.Find("Deck").transform);
             created.AddComponent<PlayerDeck>();
         }

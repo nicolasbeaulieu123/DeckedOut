@@ -45,5 +45,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pfDamagePopup: {fileID: 7960092409217759549, guid: 4997d260f7aa2074da870217c93f7fd4,
     type: 3}
-  pfFrostAbility: {fileID: 2963428409142131910, guid: 259c6d832fae03f4e99789a7316f0b0e,
+  MagicianMusic: {fileID: 8300000, guid: add9e2c2a1b2746d6987518c41d4bda2, type: 3}
+  JokerMusic: {fileID: 8300000, guid: 6f7ff6bd048ec42a0baff733a4384c04, type: 3}
+  SerpentMusic: {fileID: 8300000, guid: 98c094b21a59346668ad57ee0df54346, type: 3}
+  SilencerMusic: {fileID: 8300000, guid: 65be69a15aebf4fe6afa4d50f3e209ce, type: 3}
+  JungleMapMusic: {fileID: 8300000, guid: 5f084be105545468899b137f46071c6c, type: 3}
+  OceanMapMusic: {fileID: 8300000, guid: 1aa11e44a96bc4e84b0f962d299774f0, type: 3}
+  LavaMapMusic: {fileID: 8300000, guid: da1a78764cc3d4eb48f1f4356bcc40da, type: 3}
+  DungeonMapMusic: {fileID: 8300000, guid: 287a3728e9ea240f0aeb0a6d1c9307a6, type: 3}
+  GreyMapMusic: {fileID: 8300000, guid: ddbfe8ed2829a4607b2500c704210648, type: 3}
+  DefeatSound: {fileID: 8300000, guid: 2a19231a1933340fbba83c3a5df3b921, type: 3}
+  hitSound: {fileID: 8300000, guid: 1c2917375bf7de445ab35a4f97bc1b42, type: 3}
+  Boss_Magician_Heal: {fileID: 8300000, guid: b1d88b3a5958805478d658120626f0d2, type: 3}
+  Boss_Magician_Destroy: {fileID: 8300000, guid: e53c50cdd14c0004f8f381d4a956ab7b,
     type: 3}
+  Boss_Magician_Destroy_Charge: {fileID: 8300000, guid: aa0963cbed716494fb56ac5f98b68934,
+    type: 3}
+  Boss_Knight_Charge: {fileID: 8300000, guid: 9752b8eb31ca95146916f39d576d0175, type: 3}
+  Boss_Knight_Poof: {fileID: 8300000, guid: 1c58756cbf41d76479bac606d55926c0, type: 3}
+  Boss_Snake_Charge: {fileID: 8300000, guid: 532c04f65161e7d4d8107b19aea43630, type: 3}
+  Boss_Silencer_Charge: {fileID: 8300000, guid: c7dce7eb081913043946915845a6cc6f,
+    type: 3}
+  Card_Angel_Life: {fileID: 8300000, guid: 9ae56310c0f568a4b909855c7919122f, type: 3}
+  Card_Time_Rewind: {fileID: 8300000, guid: f7e0c5851b450f54e8326c6a1af71ac7, type: 3}
+  EffectsMixer: {fileID: 24100000, guid: 6f19d3fd536c2f04c91c5b6b78999e8b, type: 2}

@@ -23,7 +23,7 @@ public class RainbowAbility : MonoBehaviour
             {
                 cardPlaced = true;
                 GameObject created = Instantiate(PlayerDeck.Deck()[cardDeckIndex], board.slots[Board.FindSlotIdFromName(gameObject.transform.parent.name) - 1].transform, false);
-                created.transform.localScale = new Vector3(0.4f, 0.4f, 1);
+                created.transform.localScale = new Vector3(1.4f, 1.4f, 0);
                 created.AddComponent<DragDrop>();
                 created.GetComponent<DragDrop>().canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
                 Card cardType = GameObject.Find("Deck").transform.Find(created.name).GetComponent<Card>();

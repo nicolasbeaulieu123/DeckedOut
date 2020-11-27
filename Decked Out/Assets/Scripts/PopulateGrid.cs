@@ -15,23 +15,22 @@ public class PopulateGrid : MonoBehaviour
         numberToCreate = cards.Length;
         Populate();
     }
-
-    void Update()
-    {
-        
-    }
-
     void Populate()
     {
         GameObject newObj;
 
         for (int i = 0; i < numberToCreate; i++)
         {
-            newObj = (GameObject)Instantiate(cards[i], transform);
-            newObj.AddComponent<CardsHandler>();
-            newObj.GetComponent<CardsHandler>().CardMenu = GameObject.FindGameObjectWithTag("CardMenu");
-            newObj.GetComponent<CardsHandler>().Deck = GameObject.FindGameObjectWithTag("Deck");
-            newObj.tag = "AcquiredCard";
+            if (PlayerPrefs.GetInt(cards[i].name, 0) != 0)
+            {
+                newObj = (GameObject)Instantiate(cards[i], transform);
+                newObj.transform.localScale = new Vector3(1.4f, 1.4f, 0);
+                Destroy(newObj.GetComponent<CardSlot>());
+                newObj.AddComponent<CardsHandler>();
+                newObj.GetComponent<CardsHandler>().CardMenu = GameObject.FindGameObjectWithTag("CardMenu");
+                newObj.GetComponent<CardsHandler>().Deck = GameObject.FindGameObjectWithTag("Deck");
+                newObj.tag = "AcquiredCard";
+            }
         }
         GameObject.FindGameObjectWithTag("CardMenu").SetActive(false);
     }

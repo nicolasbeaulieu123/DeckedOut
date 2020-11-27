@@ -96,6 +96,7 @@ MonoBehaviour:
   Description: Has a chance on each hit to instantly kill the target. The ability
     does not apply to bosses.
   AccentsColor: {r: 0.6313726, g: 0.6313726, b: 0.6313726, a: 1}
+  CardPrice: 10000
   BaseAttack: 20
   actualAttack: 0
   BaseAttackSpeed: 1.2
@@ -116,6 +117,8 @@ MonoBehaviour:
   PowerUpLevel: 1
   PowerUpCost: 100
   starCount: 1
+  canShoot: 1
+  canMerge: 1
 --- !u!225 &-6420979166053864168
 CanvasGroup:
   m_ObjectHideFlags: 0

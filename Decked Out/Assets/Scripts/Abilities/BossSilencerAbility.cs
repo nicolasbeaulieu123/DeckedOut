@@ -43,6 +43,7 @@ public class BossSilencerAbility : MonoBehaviour
                     pe = Instantiate(pfAbilityAnimation);
                     pe.transform.position = new Vector3(Boss.GetPosition().x, Boss.GetPosition().y, 0);
                     pe.transform.SetParent(GameObject.Find("Animations").transform, true);
+                    SoundManager.PlaySound(GameAssets.Instance.Boss_Silencer_Charge);
                 }
                 if (silenceCardsCooldown < 0)
                 {

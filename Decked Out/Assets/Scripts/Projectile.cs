@@ -51,6 +51,7 @@ public class Projectile : MonoBehaviour
             {
                 if (card != null)
                 {
+                    SoundManager.PlaySound(GameAssets.Instance.hitSound, 2);
                     card.TryActivateAbility(enemy);
                     bool isCrit = Random.Range(0, 101) <= 10;
                     int damageAmount = isCrit ? card.actualAttack * Card.CritDamageBoost / 100 : card.actualAttack;

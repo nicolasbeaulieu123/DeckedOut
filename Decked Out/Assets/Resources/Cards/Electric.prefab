@@ -96,6 +96,7 @@ MonoBehaviour:
   Description: When the card hits and enemy, the 2 next enemies take 70% and 30%
     damage.
   AccentsColor: {r: 1, g: 0.77647066, b: 0, a: 1}
+  CardPrice: 4000
   BaseAttack: 30
   actualAttack: 0
   BaseAttackSpeed: 0.7
@@ -114,7 +115,10 @@ MonoBehaviour:
   PowerUpATKS: 0
   PowerUpAbility: 20
   PowerUpLevel: 1
+  PowerUpCost: 100
   starCount: 1
+  canShoot: 1
+  canMerge: 1
 --- !u!225 &9194708834812965694
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -189,3 +193,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccd27558f925ad448b40df7a0c5a1ddb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pfElectricAnimation: {fileID: 6736256032070688566, guid: 00a60c1134c5c624da349af456dc1bf3,
+    type: 3}
+  pfElectricBolt: {fileID: 4802464512002963674, guid: 1b3fc38cf7cef2347926ae5a695b4c98,
+    type: 3}

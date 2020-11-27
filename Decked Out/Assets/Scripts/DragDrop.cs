@@ -73,7 +73,7 @@ public class DragDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
         GameObject created = Instantiate(PlayerDeck.Deck()[indexOfCard], UtilsClass.GetMouseWorldPosition(), Quaternion.identity);
         created.transform.SetParent(card.transform.parent.transform);
         created.GetComponent<RectTransform>().anchoredPosition = Vector3.zero;
-        created.GetComponent<RectTransform>().localScale = new Vector3(0.4f, 0.4f, 0);
+        created.GetComponent<RectTransform>().localScale = new Vector3(1.4f, 1.4f, 0);
         created.GetComponent<CanvasGroup>().alpha = 0.6f;
         for (int i = created.transform.childCount; i > 0; i++)
         {

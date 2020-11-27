@@ -95,6 +95,7 @@ MonoBehaviour:
   Name: Frost
   Description: Slows down the enemy. Increased star count will slow faster.
   AccentsColor: {r: 0.2627451, g: 0.7294118, b: 0.9960785, a: 1}
+  CardPrice: 4000
   BaseAttack: 30
   actualAttack: 0
   BaseAttackSpeed: 1
@@ -113,7 +114,10 @@ MonoBehaviour:
   PowerUpATKS: 0
   PowerUpAbility: 0.02
   PowerUpLevel: 1
+  PowerUpCost: 100
   starCount: 1
+  canShoot: 1
+  canMerge: 1
 --- !u!225 &-4104815239328660848
 CanvasGroup:
   m_ObjectHideFlags: 0

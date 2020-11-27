@@ -96,6 +96,7 @@ MonoBehaviour:
   Description: Has a chance on each hit to give 1 life back. The player can go up
     to 5 lives at a time.
   AccentsColor: {r: 0.8862746, g: 0.7803922, b: 0.07058824, a: 1}
+  CardPrice: 8000
   BaseAttack: 10
   actualAttack: 0
   BaseAttackSpeed: 0.8
@@ -114,7 +115,10 @@ MonoBehaviour:
   PowerUpATKS: 0.05
   PowerUpAbility: 0.1
   PowerUpLevel: 1
+  PowerUpCost: 100
   starCount: 1
+  canShoot: 1
+  canMerge: 1
 --- !u!225 &-6213611983539623809
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -189,5 +193,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26961ce674342624fa90d6e9f2706311, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pfAngelReviveAnimation: {fileID: 100008, guid: e3d819d8722fa1f47a3f68574b56dfb3,
+  pfAngelReviveAnimation: {fileID: 6842435271589622553, guid: af1a9b6547c543248a9f327dff549e00,
     type: 3}

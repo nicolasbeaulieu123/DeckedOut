@@ -8,7 +8,7 @@ public class Board : MonoBehaviour
     public GameObject[] slots;
     public static Board Instance { get; private set; }
 
-    private void Awake()
+    private void Start()
     {
         Instance = this;
     }

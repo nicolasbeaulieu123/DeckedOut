@@ -75,7 +75,7 @@ public class CardMergingManager : MonoBehaviour
     {
         Board board = GameObject.FindGameObjectWithTag("Board").GetComponent<Board>();
         GameObject created = Instantiate(PlayerDeck.Deck()[Random.Range(0, 5)], board.slots[Board.FindSlotIdFromName(parent.name) - 1].transform, false);
-        created.transform.localScale = new Vector3(0.4f, 0.4f, 1);
+        created.transform.localScale = new Vector3(1.4f, 1.4f, 0);
         created.AddComponent<DragDrop>();
         created.GetComponent<DragDrop>().canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
         created.tag = "CardOnBoard";

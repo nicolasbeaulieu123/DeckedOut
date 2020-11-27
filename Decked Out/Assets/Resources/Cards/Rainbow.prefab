@@ -96,6 +96,7 @@ MonoBehaviour:
   Description: When merged with a card with the same star count, it becomes the same
     card as the target card.
   AccentsColor: {r: 0, g: 0, b: 0, a: 1}
+  CardPrice: 10000
   BaseAttack: 20
   actualAttack: 0
   BaseAttackSpeed: 1
@@ -114,7 +115,10 @@ MonoBehaviour:
   PowerUpATKS: 0
   PowerUpAbility: 0
   PowerUpLevel: 1
+  PowerUpCost: 100
   starCount: 1
+  canShoot: 1
+  canMerge: 1
 --- !u!225 &-3187012554934070580
 CanvasGroup:
   m_ObjectHideFlags: 0

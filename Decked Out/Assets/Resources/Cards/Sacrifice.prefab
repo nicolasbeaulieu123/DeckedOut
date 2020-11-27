@@ -96,6 +96,7 @@ MonoBehaviour:
   Description: Gains CP proportionnal to the star count of When merged with a card
     with the same star count, gains CP proportionate to star count of both cards.
   AccentsColor: {r: 0.14901961, g: 0.7372549, b: 0.45098042, a: 1}
+  CardPrice: 6000
   BaseAttack: 10
   actualAttack: 0
   BaseAttackSpeed: 1
@@ -114,7 +115,10 @@ MonoBehaviour:
   PowerUpATKS: 0
   PowerUpAbility: 0
   PowerUpLevel: 1
+  PowerUpCost: 100
   starCount: 1
+  canShoot: 1
+  canMerge: 1
 --- !u!225 &-7223639916073808613
 CanvasGroup:
   m_ObjectHideFlags: 0

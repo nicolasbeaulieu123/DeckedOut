@@ -95,6 +95,7 @@ MonoBehaviour:
   Name: Time
   Description: Has a chance on each hit to make all enemies move backwards.
   AccentsColor: {r: 1, g: 0.936, b: 0.82, a: 1}
+  CardPrice: 10000
   BaseAttack: 10
   actualAttack: 0
   BaseAttackSpeed: 0.8
@@ -113,7 +114,10 @@ MonoBehaviour:
   PowerUpATKS: 0.05
   PowerUpAbility: 0.3
   PowerUpLevel: 1
+  PowerUpCost: 100
   starCount: 1
+  canShoot: 1
+  canMerge: 1
 --- !u!225 &2850486654758304769
 CanvasGroup:
   m_ObjectHideFlags: 0

@@ -15,6 +15,8 @@ public class Card : MonoBehaviour
 
     public Color AccentsColor;
 
+    public int CardPrice;
+
     public int BaseAttack;
     public int actualAttack;
 

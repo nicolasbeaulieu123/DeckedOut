@@ -29,7 +29,7 @@ public class SumonnerAbility : MonoBehaviour
                 board.isFull[index] = true;
                 cardPlaced = true;
                 GameObject created = Instantiate(PlayerDeck.Deck()[Random.Range(1, 2)], board.slots[index].transform, false);
-                created.transform.localScale = new Vector3(0.4f, 0.4f, 1);
+                created.transform.localScale = new Vector3(1.4f, 1.4f, 0);
                 created.AddComponent<DragDrop>();
                 created.GetComponent<DragDrop>().canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
                 Card cardType = GameObject.Find("Deck").transform.Find(created.name).GetComponent<Card>();

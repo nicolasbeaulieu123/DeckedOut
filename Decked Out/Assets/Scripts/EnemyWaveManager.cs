@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class EnemyWaveManager : MonoBehaviour
 {
@@ -10,10 +12,17 @@ public class EnemyWaveManager : MonoBehaviour
     public GameObject pfEnemyDiedAnim;
     public static EnemyWaveManager Instance;
 
+    [SerializeField] GameObject GameOverMenu;
+    [SerializeField] TextMeshProUGUI GoldGained;
+    [SerializeField] TextMeshProUGUI TotalDamage;
+    [SerializeField] TextMeshProUGUI Wave;
+    [SerializeField] AudioMixer backgroundMixer;
+
     private enum State
     {
         WaitingToSpawnNextWave,
         SpawningWave,
+        GameOver
     }
     public enum EnemyTypes
     {
@@ -38,7 +47,7 @@ public class EnemyWaveManager : MonoBehaviour
     [SerializeField] private int waveNumber = 0;
     private float nextWaveSpawnTimer;
     private float nextEnemySpawnTimer;
-    private int remainingEnemySpawnAmount;
+    public int remainingEnemySpawnAmount;
 
     // Remaining amount of enemies to spawn
     private int fastEnemiesRemaining;
@@ -84,6 +93,8 @@ public class EnemyWaveManager : MonoBehaviour
     private BossTypes lastBoss;
 
     [SerializeField] private Vector3 spawnPosition = new Vector3(-299.95f, -260.5f);
+
+    public int WaveNumber() => waveNumber;
     private void Start()
     {
         Instance = this;
@@ -115,11 +126,47 @@ public class EnemyWaveManager : MonoBehaviour
         Destroy(enemy.gameObject);
     }
 
+    int goldGained = 0;
+    public void PlayerDied()
+    {
+        state = State.GameOver;
+        Time.timeScale = 0f;
+        GameOverMenu.SetActive(true);
+        int playerMoney = PlayerPrefs.GetInt("Money", 0);
+        goldGained = (waveNumber - 1) * 50;
+        PlayerPrefs.SetInt("Money", playerMoney + goldGained);
+        PlayerPrefs.Save();
+        FinalStats();
+    }
+
+    public void PlayerGiveUp()
+    {
+        state = State.GameOver;
+        Time.timeScale = 0f;
+        FinalStats();
+    }
+
+    void FinalStats()
+    {
+        Wave.text += waveNumber.ToString();
+        TotalDamage.text = TotalDamage.text.Replace("DAMAGE", PlayerStats.TotalDamage.ToString());
+        GoldGained.text = "+ " + goldGained.ToString();
+    }
+
+    bool faded = false;
     private void Update()
     {
         switch (state)
         {
             case State.WaitingToSpawnNextWave:
+                if (((waveNumber + 1) % 10 == 0 || (waveNumber + 1) % 10 == 1) && waveNumber != 0)
+                {
+                    if (!faded)
+                    {
+                        StartCoroutine(FadeMixerGroup.StartFade(backgroundMixer, "BackgroundVolume", 4.5f, 0.0001f));
+                        faded = true;
+                    }
+                }
                 nextWaveSpawnTimer -= Time.deltaTime;
                 if (nextWaveSpawnTimer < 0f)
                 {
@@ -147,8 +194,10 @@ public class EnemyWaveManager : MonoBehaviour
                 {
                     PlayerStats.WaveNumber++;
                     state = State.WaitingToSpawnNextWave;
-                    nextWaveSpawnTimer = 3f;
+                    nextWaveSpawnTimer = 5f;
                 }
+                break;
+            case State.GameOver:
                 break;
         }
     }
@@ -162,10 +211,12 @@ public class EnemyWaveManager : MonoBehaviour
             {
                 nextBoss = (BossTypes)UnityEngine.Random.Range(0, Enum.GetNames(typeof(BossTypes)).Length);
             } while (nextBoss == lastBoss);
+            CurrentMusicManager.instance.SetBossName(nextBoss.ToString());
             lastBoss = nextBoss;
             Enemy created = Enemy.Create(spawnPosition, nextBoss + "BossEnemy");
             enemies.Add(created);
             created.GetComponent<Enemy>().health = (int)(64.176 * Math.Pow(waveNumber, 2.8152) + (0.2755 * Math.Pow(waveNumber, 4) - 13.32 * Math.Pow(waveNumber, 3) - 10.387 * Math.Pow(waveNumber, 2) + 1921.6 * waveNumber - 2528.7));
+            created.GetComponent<Enemy>().startingHealth = created.GetComponent<Enemy>().health;
             bossRemaining--;
             remainingEnemySpawnAmount--;
         }
@@ -174,6 +225,7 @@ public class EnemyWaveManager : MonoBehaviour
             Enemy created = Enemy.Create(spawnPosition, EnemyTypes.MiniBoss + "Enemy");
             enemies.Add(created);
             created.GetComponent<Enemy>().health = (int)(28 * Math.Pow(waveNumber, 2.9096) + (-0.0001 * Math.Pow(waveNumber, 5) + 0.2588 * Math.Pow(waveNumber, 4) - 10.514 * Math.Pow(waveNumber, 3) + 50.258 * Math.Pow(waveNumber, 2) + 541.13 * waveNumber - 85.326));
+            created.GetComponent<Enemy>().startingHealth = created.GetComponent<Enemy>().health;
             miniBossRemaining--;
             remainingEnemySpawnAmount--;
         }
@@ -195,6 +247,7 @@ public class EnemyWaveManager : MonoBehaviour
             else
                 fEnemyHp += fEnemyHpScale;
             created.GetComponent<Enemy>().health = fEnemyHp;
+            created.GetComponent<Enemy>().startingHealth = fEnemyHp;
             enemies.Add(created);
             fastEnemiesRemaining--;
             remainingEnemySpawnAmount--;
@@ -203,6 +256,7 @@ public class EnemyWaveManager : MonoBehaviour
 
     private void SpawnWave()
     {
+        faded = false;
         remainingEnemySpawnAmount = 10;
         state = State.SpawningWave;
         waveNumber++;

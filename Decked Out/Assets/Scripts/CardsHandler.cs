@@ -17,6 +17,11 @@ public class CardsHandler : MonoBehaviour, IPointerDownHandler
 
     private static bool loaded = false;
 
+    GameObject acquiredCardsList;
+    GameObject acquiredCardsText;
+    GameObject selectACardText;
+    GameObject cancelSelectButton;
+
     void Start()
     {
         CardsPrefabs = Resources.LoadAll<GameObject>("Cards");
@@ -28,6 +33,11 @@ public class CardsHandler : MonoBehaviour, IPointerDownHandler
             if (!selectedCards.Any(c => c.name.Contains(obj.name)))
                 selectedCards.Add(obj);
         }
+
+        acquiredCardsList = GameObject.Find("AcquiredCards").gameObject;
+        acquiredCardsText = GameObject.Find("DeckMenu").transform.Find("Text AcquiredCards").gameObject;
+        selectACardText = GameObject.Find("DeckMenu").transform.Find("Text SelectACard").gameObject;
+        cancelSelectButton = GameObject.Find("DeckMenu").transform.Find("Button CancelSelect").gameObject;
     }
 
     public static void ChangedScene()
@@ -111,6 +121,7 @@ public class CardsHandler : MonoBehaviour, IPointerDownHandler
     {
         GameObject createdCard = Instantiate(toCreate, new Vector2(x, y), Quaternion.identity);
         createdCard.transform.SetParent(Deck.transform);
+        createdCard.transform.localScale = new Vector3(1, 1, 0);
         createdCard.name = toCreate.name;
 
         if (createdCard.GetComponent<Image>().sprite.name != "blank")
@@ -153,10 +164,6 @@ public class CardsHandler : MonoBehaviour, IPointerDownHandler
 
     private void toggleReplaceMenu()
     {
-        GameObject acquiredCardsList = GameObject.Find("DeckMenu").transform.Find("AcquiredCards").gameObject;
-        GameObject acquiredCardsText = GameObject.Find("DeckMenu").transform.Find("Text AcquiredCards").gameObject;
-        GameObject selectACardText = GameObject.Find("DeckMenu").transform.Find("Text SelectACard").gameObject;
-        GameObject cancelSelectButton = GameObject.Find("DeckMenu").transform.Find("Button CancelSelect").gameObject;
         acquiredCardsList.SetActive(!acquiredCardsList.activeInHierarchy);
         acquiredCardsText.SetActive(!acquiredCardsText.activeInHierarchy);
         selectACardText.SetActive(!selectACardText.activeInHierarchy);

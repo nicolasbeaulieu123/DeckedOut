@@ -12,6 +12,8 @@ public class PlayerStats : MonoBehaviour {
 
 	public static int WaveNumber;
 
+	public static int TotalDamage;
+
 	void Start ()
 	{
 		CP = startCP;

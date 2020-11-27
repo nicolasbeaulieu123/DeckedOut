@@ -70,6 +70,7 @@ public class BossSerpentAbility : MonoBehaviour
                 GameObject pe = Instantiate(pfAbilityAnimation);
                 pe.transform.position = new Vector3(Boss.GetPosition().x, Boss.GetPosition().y, 45);
                 pe.transform.SetParent(GameObject.Find("Animations").transform, true);
+                SoundManager.PlaySound(GameAssets.Instance.Boss_Snake_Charge);
             }
         }
         if (spawnedCount == BaseAbilitySpawnAmount)

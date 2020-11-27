@@ -94,6 +94,7 @@ MonoBehaviour:
   Name: Mechanical
   Description: Deals double damage to bosses.
   AccentsColor: {r: 0.40000004, g: 0.40000004, b: 0.40000004, a: 1}
+  CardPrice: 6000
   BaseAttack: 100
   actualAttack: 0
   BaseAttackSpeed: 1
@@ -112,8 +113,10 @@ MonoBehaviour:
   PowerUpATKS: 0
   PowerUpAbility: 0
   PowerUpLevel: 1
+  PowerUpCost: 100
   starCount: 1
-  CardObject: {fileID: 0}
+  canShoot: 1
+  canMerge: 1
 --- !u!225 &-3824543746896453240
 CanvasGroup:
   m_ObjectHideFlags: 0

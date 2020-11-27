@@ -11,6 +11,9 @@ public class TimeAbility : MonoBehaviour
     static bool isRewinding = false;
     static int TimeCardsCount;
 
+    static GameObject timeSound = null;
+    static bool playedSound = false;
+
     private void Start()
     {
         TimeCardsCount++;
@@ -22,9 +25,19 @@ public class TimeAbility : MonoBehaviour
         rewindAbilityTimer -= Time.deltaTime / TimeCardsCount;
         if (isRewinding)
         {
+            if (!playedSound)
+            {
+                playedSound = true;
+                timeSound = SoundManager.PlaySound(GameAssets.Instance.Card_Time_Rewind, 10, true);
+            }
             rewindTimer -= Time.deltaTime / TimeCardsCount;
             if (rewindTimer < 0)
             {
+                //timeSound.GetComponent<AudioSource>().loop = false;
+                //timeSound.GetComponent<AudioSource>().Stop();
+                DestroyImmediate(timeSound);
+                playedSound = false;
+                timeSound = null;
                 isRewinding = false;
                 Enemy.Rewinding = false;
                 rewindTimer = BASE_REWIND_TIMER;

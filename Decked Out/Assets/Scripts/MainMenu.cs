@@ -11,12 +11,17 @@ public class MainMenu : MonoBehaviour
     }
     public void mainmenu()
     {
+        Time.timeScale = 1f;
         SceneManager.LoadScene("Main Menu");
         CardsHandler.ChangedScene();
     }
     public void Deck()
     {
         SceneManager.LoadScene("Deck");
+    }
+    public void Shop()
+    {
+        SceneManager.LoadScene("Shop");
     }
     public void QuitGame()
     {

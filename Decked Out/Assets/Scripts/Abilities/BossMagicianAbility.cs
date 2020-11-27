@@ -62,7 +62,8 @@ public class BossMagicianAbility : MonoBehaviour
             pe = Instantiate(pfAbilityAnimationHeal);
             pe.transform.position = new Vector3(Boss.GetPosition().x, Boss.GetPosition().y, 0);
             pe.transform.SetParent(GameObject.Find("Animations").transform, true);
-            Boss.health = (int)(Boss.health + Boss.health * 0.5f);
+            SoundManager.PlaySound(GameAssets.Instance.Boss_Magician_Heal);
+            Boss.health = (int)(Boss.health + Boss.health * 0.3f);
         }
     }
     void DestroyAbilityAnim()
@@ -73,6 +74,7 @@ public class BossMagicianAbility : MonoBehaviour
             pe = Instantiate(pfAbilityAnimationDestroy);
             pe.transform.position = new Vector3(Boss.GetPosition().x, Boss.GetPosition().y, 0);
             pe.transform.SetParent(GameObject.Find("Animations").transform, true);
+            SoundManager.PlaySound(GameAssets.Instance.Boss_Magician_Destroy_Charge);
         }
     }
     void DestroyAbility()
@@ -84,7 +86,7 @@ public class BossMagicianAbility : MonoBehaviour
             GameObject destroyCardAnim = Instantiate(pfAbilityCardAnimation);
             destroyCardAnim.transform.position = new Vector3(card.transform.position.x, card.transform.position.y, 0);
             destroyCardAnim.transform.SetParent(GameObject.Find("Animations").transform, true);
-            Board.Instance.isFull[Board.FindSlotIdFromName(card.transform.parent.name)] = false;
+            Board.Instance.isFull[Board.FindSlotIdFromName(card.transform.parent.name) - 1] = false;
             Destroy(card);
         }
     }

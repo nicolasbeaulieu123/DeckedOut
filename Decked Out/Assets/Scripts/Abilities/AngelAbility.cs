@@ -13,6 +13,7 @@ public class AngelAbility : MonoBehaviour
         {
             GameObject pe = Instantiate(pfAngelReviveAnimation, gameObject.transform.position, gameObject.transform.rotation);
             pe.transform.SetParent(GameObject.Find("Animations").transform);
+            SoundManager.PlaySound(GameAssets.Instance.Card_Angel_Life);
             PlayerStats.Lives++;
         }
     }

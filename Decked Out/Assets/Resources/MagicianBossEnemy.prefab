@@ -35,7 +35,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 8.49, y: -1.37}
+  m_AnchoredPosition: {x: 8.49, y: 0.06}
   m_SizeDelta: {x: 20, y: 5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &6049531602225290532
@@ -248,7 +248,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 779e6cb338aaa974d8be2d4a9d2f619d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BaseAbilityCoolDown: 10
+  BaseAbilityCoolDown: 12
   pfAbilityAnimationHeal: {fileID: 6438394453628618169, guid: 3d4465046e9ae75478bb950f6a54b974,
     type: 3}
   pfAbilityAnimationDestroy: {fileID: 1868273214097009709, guid: fdc170ad76edf274c909808dea680a1a,

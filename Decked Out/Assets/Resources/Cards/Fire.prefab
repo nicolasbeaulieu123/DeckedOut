@@ -96,6 +96,7 @@ MonoBehaviour:
   Description: When the bullet hits the target, deals an explosive damage to monsters
     in range.
   AccentsColor: {r: 1, g: 0.5953561, b: 0.25943398, a: 1}
+  CardPrice: 8000
   BaseAttack: 20
   actualAttack: 0
   BaseAttackSpeed: 0.8
